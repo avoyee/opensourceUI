@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<renderer class="Fashion.SwitchButton" extends="renderer::Fashion.Widget">
+    <set-property name="Class"               value="switchbutton"/>
+    <set-property name="ColorFgWindow"       value="0xFF000000"/>
+    <set-property name="ColorBgWindow"       value="0xFFFFFFFF"/>
+    <set-property name="ColorBorderInActive" value="0xFFC8D0D4"/>
+
+    <property name="RoundRectRadius"    id="40961" type="int"   default="3"/>
+    <property name="BlockColor"         id="40977" type="color" default="0xFFDBDBDB"/>
+    <property name="ForegroundColorOn"  id="40978" type="color" default="0xFFDDDDDD"/>
+    <property name="BackgroundColorOn"  id="40979" type="color" default="0xFFFFB958"/>
+    <property name="ForegroundColorOff" id="40980" type="color" default="0xFF000000"/>
+    <property name="BackgroundColorOff" id="40981" type="color" default="0xFFFFFFFF"/>
+
+</renderer>
+

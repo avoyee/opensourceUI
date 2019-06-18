@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<renderer class="Fashion.ImgNavBar" extends="renderer::Fashion.Widget">
+    <set-property name="Class"               value="imgnavbar"/>
+    <set-property name="ColorFgWindow"       value="0xFF000000"/>
+    <set-property name="ColorBgWindow"       value="0xFFFFFFFF"/>
+    <set-property name="ColorBorderInActive" value="0xFFC8D0D4"/>
+
+    <property name="ColorFgText"    id="41001" type="color" default="0xFF9F7431"/>
+</renderer>
+

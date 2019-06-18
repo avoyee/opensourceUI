@@ -1,0 +1,12 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: mGNCS4Touch
+Description: An extended new control set for smart device with a touch panel
+Version: @MGNCS4TOUCH_VERSION@
+Requires:
+Libs: -L${libdir} @PC_LIBS@
+Libs.private:
+Cflags: -I${includedir} @PC_CFLAGS@

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<window class="NewTrackBar" extends="TrackBar">
+
+    <set-property name="Class" value="newtrackbar"/>
+    <set-property name="Ruler" value="False"/>
+
+    <default-property name="Width"   value="100"/>
+    <default-property name="Height"  value="30"/>
+    <default-property name="Border"  value="FALSE"/>
+    <default-property name="BgColor" value="0xFFFFFFFF"/>
+
+    <property name="TrackFigure" id="2016" type="enum" default="Rectangle">
+        <enum>
+            <option name="Rectangle"  value="0x00"/>
+            <option name="Circle"     value="0x10"/>
+        </enum>
+    </property>
+
+    <default-property name="ThumbWidth"  value="16"/>
+    <default-property name="ThumbHeight" value="16"/>
+
+</window>
+

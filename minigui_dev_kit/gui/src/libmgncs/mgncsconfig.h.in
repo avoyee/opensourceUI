@@ -1,0 +1,371 @@
+/* mgncsconfig.h.in.  Generated from configure.ac by autoheader.  */
+
+/* Define to 1 if the `closedir' function returns void instead of `int'. */
+#undef CLOSEDIR_VOID
+
+/* Define to one of `_getb67', `GETB67', `getb67' for Cray-2 and Cray-YMP
+   systems. This function is required for `alloca.c' support on those systems.
+   */
+#undef CRAY_STACKSEG_END
+
+/* Define to 1 if using `alloca.c'. */
+#undef C_ALLOCA
+
+/* Define to 1 if you have `alloca', as a function or macro. */
+#undef HAVE_ALLOCA
+
+/* Define to 1 if you have <alloca.h> and it should be used (not on Ultrix).
+   */
+#undef HAVE_ALLOCA_H
+
+/* Define to 1 if you have the `bzero' function. */
+#undef HAVE_BZERO
+
+/* Define to 1 if you have the <dirent.h> header file, and it defines `DIR'.
+   */
+#undef HAVE_DIRENT_H
+
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#undef HAVE_DLFCN_H
+
+/* Define to 1 if you don't have `vprintf' but do have `_doprnt.' */
+#undef HAVE_DOPRNT
+
+/* Define to 1 if you have the `dup2' function. */
+#undef HAVE_DUP2
+
+/* Define to 1 if you have the <fcntl.h> header file. */
+#undef HAVE_FCNTL_H
+
+/* Define to 1 if you have the `fork' function. */
+#undef HAVE_FORK
+
+/* Define to 1 if you have the `ftruncate' function. */
+#undef HAVE_FTRUNCATE
+
+/* Define to 1 if you have the `getcwd' function. */
+#undef HAVE_GETCWD
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#undef HAVE_INTTYPES_H
+
+/* Define to 1 if you have the `memmove' function. */
+#undef HAVE_MEMMOVE
+
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
+/* Define to 1 if you have the `memset' function. */
+#undef HAVE_MEMSET
+
+/* Define to 1 if you have the `mmap' function. */
+#undef HAVE_MMAP
+
+/* Define to 1 if you have the <ndir.h> header file, and it defines `DIR'. */
+#undef HAVE_NDIR_H
+
+/* Define to 1 if you have the `putenv' function. */
+#undef HAVE_PUTENV
+
+/* Define to 1 if `stat' has the bug that it succeeds when given the
+   zero-length file name argument. */
+#undef HAVE_STAT_EMPTY_STRING_BUG
+
+/* Define to 1 if stdbool.h conforms to C99. */
+#undef HAVE_STDBOOL_H
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H
+
+/* Define to 1 if you have the `strchr' function. */
+#undef HAVE_STRCHR
+
+/* Define to 1 if you have the `strdup' function. */
+#undef HAVE_STRDUP
+
+/* Define to 1 if you have the `strerror' function. */
+#undef HAVE_STRERROR
+
+/* Define to 1 if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H
+
+/* Define to 1 if you have the `strndup' function. */
+#undef HAVE_STRNDUP
+
+/* Define to 1 if you have the `strstr' function. */
+#undef HAVE_STRSTR
+
+/* Define to 1 if you have the <sys/dir.h> header file, and it defines `DIR'.
+   */
+#undef HAVE_SYS_DIR_H
+
+/* Define to 1 if you have the <sys/ioctl.h> header file. */
+#undef HAVE_SYS_IOCTL_H
+
+/* Define to 1 if you have the <sys/ndir.h> header file, and it defines `DIR'.
+   */
+#undef HAVE_SYS_NDIR_H
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#undef HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/time.h> header file. */
+#undef HAVE_SYS_TIME_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
+
+/* Define to 1 if you have <sys/wait.h> that is POSIX.1 compatible. */
+#undef HAVE_SYS_WAIT_H
+
+/* Define to 1 if you have the <termios.h> header file. */
+#undef HAVE_TERMIOS_H
+
+/* Define to 1 if you have the <termio.h> header file. */
+#undef HAVE_TERMIO_H
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Define to 1 if you have the `vfork' function. */
+#undef HAVE_VFORK
+
+/* Define to 1 if you have the <vfork.h> header file. */
+#undef HAVE_VFORK_H
+
+/* Define to 1 if you have the `vprintf' function. */
+#undef HAVE_VPRINTF
+
+/* Define to 1 if `fork' works. */
+#undef HAVE_WORKING_FORK
+
+/* Define to 1 if `vfork' works. */
+#undef HAVE_WORKING_VFORK
+
+/* Define to 1 if the system has the type `_Bool'. */
+#undef HAVE__BOOL
+
+/* Define to 1 if `lstat' dereferences a symlink specified with a trailing
+   slash. */
+#undef LSTAT_FOLLOWS_SLASHED_SYMLINK
+
+/* Binary age of mGNCS */
+#undef MGNCS_BINARY_AGE
+
+/* MGNCS configure file name */
+#undef MGNCS_ETCFILENAME
+
+/* Interface age of mGNCS */
+#undef MGNCS_INTERFACE_AGE
+
+/* Major version of mGNCS */
+#undef MGNCS_MAJOR_VERSION
+
+/* Micro version of mGNCS */
+#undef MGNCS_MICRO_VERSION
+
+/* Minor version of mGNCS */
+#undef MGNCS_MINOR_VERSION
+
+/* Name of package */
+#undef PACKAGE
+
+/* Define to the address where bug reports for this package should be sent. */
+#undef PACKAGE_BUGREPORT
+
+/* Define to the full name of this package. */
+#undef PACKAGE_NAME
+
+/* Define to the full name and version of this package. */
+#undef PACKAGE_STRING
+
+/* Define to the one symbol short name of this package. */
+#undef PACKAGE_TARNAME
+
+/* Define to the home page for this package. */
+#undef PACKAGE_URL
+
+/* Define to the version of this package. */
+#undef PACKAGE_VERSION
+
+/* If using the C implementation of alloca, define if you know the
+   direction of stack growth for your system; otherwise it will be
+   automatically deduced at runtime.
+	STACK_DIRECTION > 0 => grows toward higher addresses
+	STACK_DIRECTION < 0 => grows toward lower addresses
+	STACK_DIRECTION = 0 => direction of growth unknown */
+#undef STACK_DIRECTION
+
+/* Define to 1 if you have the ANSI C header files. */
+#undef STDC_HEADERS
+
+/* Define to 1 if your <sys/time.h> declares `struct tm'. */
+#undef TM_IN_SYS_TIME
+
+/* Version number of package */
+#undef VERSION
+
+/* Define if support animate */
+#undef _MGNCSCTRL_ANIMATE
+
+/* Define if support colorbutton */
+#undef _MGNCSCTRL_COLORBUTTON
+
+/* Define if support combobox */
+#undef _MGNCSCTRL_COMBOBOX
+
+/* Define if support container */
+#undef _MGNCSCTRL_CONTAINER
+
+/* Define if support dialogbox */
+#undef _MGNCSCTRL_DIALOGBOX
+
+/* Define if support iconview */
+#undef _MGNCSCTRL_ICONVIEW
+
+/* Define if support imagebutton */
+#undef _MGNCSCTRL_IMAGEBUTTON
+
+/* Define if support imwordsel */
+#undef _MGNCSCTRL_IMWORDSEL
+
+/* Define if support ledlabel */
+#undef _MGNCSCTRL_LEDLABEL
+
+/* Define if support list */
+#undef _MGNCSCTRL_LIST
+
+/* Define if support listbox */
+#undef _MGNCSCTRL_LISTBOX
+
+/* Define if support listview */
+#undef _MGNCSCTRL_LISTVIEW
+
+/* Define if support menubutton */
+#undef _MGNCSCTRL_MENUBUTTON
+
+/* Define if support monthcalendar */
+#undef _MGNCSCTRL_MONTHCALENDAR
+
+/* Define if support old multiline editor */
+#undef _MGNCSCTRL_OLD_MLEDIT
+
+/* Define if support page */
+#undef _MGNCSCTRL_PAGE
+
+/* Define if support progressbar */
+#undef _MGNCSCTRL_PROGRESSBAR
+
+/* Define if support propsheet */
+#undef _MGNCSCTRL_PROPSHEET
+
+/* Define if support rectangle */
+#undef _MGNCSCTRL_RECTANGLE
+
+/* Define if support scrollbar */
+#undef _MGNCSCTRL_SCROLLBAR
+
+/* Define if support slider */
+#undef _MGNCSCTRL_SLIDER
+
+/* Define if support spinbox */
+#undef _MGNCSCTRL_SPINBOX
+
+/* Define if support spinner */
+#undef _MGNCSCTRL_SPINNER
+
+/* Define if support new text editor */
+#undef _MGNCSCTRL_TEXTEDITOR
+
+/* Define if support title of new text editor */
+#undef _MGNCSCTRL_TEXTEDITTITLE
+
+/* Define if support toolbar */
+#undef _MGNCSCTRL_TOOLBAR
+
+/* Define if support trackbar */
+#undef _MGNCSCTRL_TRACKBAR
+
+/* Define if support datasource */
+#undef _MGNCSDB_DATASOURCE
+
+/* Define if support inidatasource */
+#undef _MGNCSDB_INI
+
+/* Define if support sqlite datasource */
+#undef _MGNCSDB_SQLITE
+
+/* Define if support staticdatasource */
+#undef _MGNCSDB_STATIC
+
+/* Define if support textdatasource */
+#undef _MGNCSDB_TEXT
+
+/* Define if support xml datasource */
+#undef _MGNCSDB_XML
+
+/* Define if support digitengine */
+#undef _MGNCSENGINE_DIGIT
+
+/* Define if support digitptiengine */
+#undef _MGNCSENGINE_DIGITPTI
+
+/* Define if support digitpyengine */
+#undef _MGNCSENGINE_DIGITPY
+
+/* Define if support imeengine */
+#undef _MGNCSENGINE_IME
+
+/* Define if support pinyinengine */
+#undef _MGNCSENGINE_PINYIN
+
+/* Define if support ptiengine */
+#undef _MGNCSENGINE_PTI
+
+/* Define if use iconv as charset convertor */
+#undef _MGNCS_CHARSET_ICONV
+
+/* Define the control surfix name */
+#undef _MGNCS_CLASS_SUFFIX
+
+/* Define if support guibuilder */
+#undef _MGNCS_GUIBUILDER_SUPPORT
+
+/* MGNCS library suffix */
+#undef _MGNCS_LIBSUFFIX
+
+/* Define if include fashion renderer */
+#undef _MGNCS_RDR_FASHION
+
+/* Define if include flat renderer */
+#undef _MGNCS_RDR_FLAT
+
+/* Define if include skin renderer */
+#undef _MGNCS_RDR_SKIN
+
+/* Define if build NCS for using edit with double buffer */
+#undef _MGNCS_USE_DBEDIT
+
+/* Define to empty if `const' does not conform to ANSI C. */
+#undef const
+
+/* Define to `__inline__' or `__inline' if that's what the C compiler
+   calls it, or to nothing if 'inline' is not supported under any name.  */
+#ifndef __cplusplus
+#undef inline
+#endif
+
+/* Define to `int' if <sys/types.h> does not define. */
+#undef pid_t
+
+/* Define to `unsigned int' if <sys/types.h> does not define. */
+#undef size_t
+
+/* Define as `fork' if `vfork' does not work. */
+#undef vfork

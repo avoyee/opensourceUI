@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<renderer class="Fashion.BtnNavBar" extends="renderer::Fashion.Widget">
+    <set-property name="Class"               value="btnnavbar"/>
+    <set-property name="ColorFgWindow"       value="0xFF000000"/>
+    <set-property name="ColorBgWindow"       value="0xFFFFFFFF"/>
+    <set-property name="ColorBorderInActive" value="0xFFC8D0D4"/>
+
+    <property name="ColorBgButton"  id="40998" type="color" default="0xFFADA9AF"/>
+    <property name="ColorFgButton"  id="40999" type="color" default="0xFFCFD089"/>
+    <property name="ColorFgText"    id="41000" type="color" default="0xFF9F7431"/>
+</renderer>
+

@@ -1,0 +1,12 @@
+/home/yongliang.li/i2/gui/src/Chipmunk2D/CMakeFiles/install/local.dir
+/home/yongliang.li/i2/gui/src/Chipmunk2D/CMakeFiles/rebuild_cache.dir
+/home/yongliang.li/i2/gui/src/Chipmunk2D/CMakeFiles/edit_cache.dir
+/home/yongliang.li/i2/gui/src/Chipmunk2D/CMakeFiles/install.dir
+/home/yongliang.li/i2/gui/src/Chipmunk2D/CMakeFiles/list_install_components.dir
+/home/yongliang.li/i2/gui/src/Chipmunk2D/src/CMakeFiles/install.dir
+/home/yongliang.li/i2/gui/src/Chipmunk2D/src/CMakeFiles/list_install_components.dir
+/home/yongliang.li/i2/gui/src/Chipmunk2D/src/CMakeFiles/chipmunk.dir
+/home/yongliang.li/i2/gui/src/Chipmunk2D/src/CMakeFiles/rebuild_cache.dir
+/home/yongliang.li/i2/gui/src/Chipmunk2D/src/CMakeFiles/chipmunk_static.dir
+/home/yongliang.li/i2/gui/src/Chipmunk2D/src/CMakeFiles/install/local.dir
+/home/yongliang.li/i2/gui/src/Chipmunk2D/src/CMakeFiles/edit_cache.dir

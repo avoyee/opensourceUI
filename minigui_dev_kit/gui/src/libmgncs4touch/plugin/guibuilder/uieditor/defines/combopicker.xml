@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<window class="ComboPicker" extends="Panel">
+	<set-property name="Class" value="combopicker"/>
+    <property name="HorizontalMargin" id = "8"  type="int"  default="0"/>
+    <property name="VerticalMargin"   id = "9"  type="int"  default="0"/>
+    <property name="VisualLines"      id = "10" type="int"  default="5"/>
+</window>
+

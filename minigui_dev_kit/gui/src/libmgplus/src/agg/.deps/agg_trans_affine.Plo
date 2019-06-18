@@ -1,0 +1,54 @@
+agg_trans_affine.lo: agg_trans_affine.cpp \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/stdc-predef.h \
+ agg_trans_affine.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/math.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/features.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/sys/cdefs.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/wordsize.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/gnu/stubs.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/gnu/stubs-hard.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/huge_val.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/huge_valf.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/huge_vall.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/inf.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/nan.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/mathdef.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/mathcalls.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/mathinline.h \
+ agg_basics.h agg_config.h
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/stdc-predef.h:
+
+agg_trans_affine.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/math.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/features.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/sys/cdefs.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/wordsize.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/gnu/stubs.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/gnu/stubs-hard.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/huge_val.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/huge_valf.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/huge_vall.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/inf.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/nan.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/mathdef.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/mathcalls.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/mathinline.h:
+
+agg_basics.h:
+
+agg_config.h:

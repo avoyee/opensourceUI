@@ -1,0 +1,12 @@
+prefix=/home/yongliang.li/i2/gui/libarary
+exec_prefix=/home/yongliang.li/i2/gui/libarary
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: mGUtils
+Description: A MiniGUI component which contains miscellaneous utilities like ColorSelectionDialogBox, FileOpenDialogBox, and so on.
+Version: 1.2.0
+Requires:
+Libs: -L${libdir} -lmgutils  -L/home/yongliang.li/i2/project/gui/libarary/lib -lminigui_procs -ljpeg -lpng -lm -lts -lfreetype  
+Libs.private:
+Cflags: -I${includedir} 

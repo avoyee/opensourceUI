@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<renderer class="Fashion.ItemBar" extends="renderer::Fashion.Widget">
+    <set-property name="Class" value="itembar"/>
+
+<!--<property name="BorderWidth"        id="8196"  type="int"   default="2"/> -->
+    <property name="RoundRectRadius"    id="40961" type="int"   default="5"/>
+    <property name="ColorBack"          id="41025" type="color" default="0xFFE7E7E7"/>
+    <property name="ColorHilite"        id="41026" type="color" default="0xFFE2B956"/>
+    <property name="ColorTick"          id="41027" type="color" default="0XFF9F7431"/>
+    <property name="ColorHiliteTick"    id="41028" type="color" default="0xFFFFFFFF"/>
+    <property name="ColorAngle"         id="41029" type="color" default="0XFF9F7431"/>
+    <property name="ColorHiliteAngle"   id="41030" type="color" default="0xFFFFFFFF"/>
+    <property name="ColorLeftText"      id="41031" type="color" default="0xFF000000"/>
+    <property name="ColorLeftTextH"     id="41032" type="color" default="0xFFFFFFFF"/>
+    <property name="ColorRightText"     id="41033" type="color" default="0xFFE2B956"/>
+    <property name="ColorRightTextH"    id="41034" type="color" default="0xFFFFFFFF"/>
+
+</renderer>
+

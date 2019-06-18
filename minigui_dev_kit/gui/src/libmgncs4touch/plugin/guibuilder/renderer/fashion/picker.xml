@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<renderer class="Fashion.Picker" extends="renderer::Fashion.Animation">
+    <set-property name="Class" value="picker"/>
+
+    <property name="ColorBgMain"        id="41008" type="color" default="0xFF808080"/>
+    <property name="ColorBgPicker"      id="41009" type="color" default="0xFFFFFFFF"/>
+    <property name="ColorFgPicker"      id="41010" type="color" default="0xFF000000"/>
+    <property name="ColorBgSelect"      id="41011" type="color" default="0xFFE5C177"/>
+    <property name="ColorNotEffect"     id="41012" type="color" default="0xFFE7E7E7"/>
+</renderer>
+

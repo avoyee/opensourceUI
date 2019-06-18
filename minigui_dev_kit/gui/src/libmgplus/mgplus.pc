@@ -1,0 +1,12 @@
+prefix=/home/yongliang.li/i2/gui/libarary
+exec_prefix=/home/yongliang.li/i2/gui/libarary
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: mGPlus
+Description: A MiniGUI component which provides support for advanced 2D verctorial graphics functions.
+Version: 1.4.0
+Requires: 
+Libs: -L${libdir} -lmgplus   -lfreetype -lpthread -lstdc++
+Libs.private:
+Cflags: -I${includedir} 

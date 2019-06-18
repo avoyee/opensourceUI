@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<renderer class="Fashion.NewTrackBar" extends="renderer::Fashion.TrackBar">
+    <set-property name="Class"               value="newtrackbar"/>
+    <set-property name="ColorBorderInActive" value="0xFFC8D0D4"/>
+	<set-property name="ColorBg3DBody"       value="0xFFFF3000"/>
+	<set-property name="ColorBgDisable"      value="0xFFFFFFFF"/>
+	<set-property name="ColorTextDisable"    value="0xFF99A8AC"/>
+	<set-property name="SliderColor"         value="0xFFC56A31"/>
+	<set-property name="ThumbRoundX"         value="1"/>
+	<set-property name="ThumbRoundY"         value="1"/>
+
+    <property name="LeftSliderColor"    id="40993" type="color" default="0xFFFFB958"/>
+    <property name="RightSliderColor"   id="40994" type="color" default="0xFFFFFFFF"/>
+    <property name="BlockColor"         id="40995" type="color" default="0xFFDBDBDB"/>
+</renderer>
+

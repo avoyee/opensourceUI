@@ -1,0 +1,12 @@
+prefix=/home/yongliang.li/i2/gui/libarary
+exec_prefix=/home/yongliang.li/i2/gui/libarary
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: mGEff
+Description: An animation and user interface effects framework for MiniGUI-based embedded systems and smart IoT devices.
+Version: 1.2.0
+Requires: minigui
+Libs: -L${libdir} -lmgeff  -L/home/yongliang.li/i2/project/gui/libarary/lib -lminigui_procs -ljpeg -lpng -lm -lts -lfreetype   -L/home/yongliang.li/i2/project/gui/libarary/lib -lmgplus -lfreetype -lpthread -lstdc++  
+Libs.private:
+Cflags: -I${includedir} 

@@ -1,0 +1,164 @@
+libpng12_la-pngset.lo: pngset.c \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/stdc-predef.h \
+ png.h /home/yongliang.li/i2/gui/libarary/include/zlib.h \
+ /home/yongliang.li/i2/gui/libarary/include/zconf.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/sys/types.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/features.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/sys/cdefs.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/wordsize.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/gnu/stubs.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/gnu/stubs-hard.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/types.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/typesizes.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/time.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/lib/gcc/arm-linux-gnueabihf/4.8.3/include/stddef.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/endian.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/endian.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/byteswap.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/byteswap-16.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/sys/select.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/select.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/sigset.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/time.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/sys/sysmacros.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/pthreadtypes.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/unistd.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/posix_opt.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/environments.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/confname.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/getopt.h \
+ pngconf.h config.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/stdio.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/libio.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/_G_config.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/wchar.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/lib/gcc/arm-linux-gnueabihf/4.8.3/include/stdarg.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/stdio_lim.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/sys_errlist.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/setjmp.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/setjmp.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/string.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/xlocale.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/stdlib.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/waitflags.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/waitstatus.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/alloca.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/stdlib-float.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/math.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/huge_val.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/huge_valf.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/huge_vall.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/inf.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/nan.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/mathdef.h \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/mathcalls.h
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/stdc-predef.h:
+
+png.h:
+
+/home/yongliang.li/i2/gui/libarary/include/zlib.h:
+
+/home/yongliang.li/i2/gui/libarary/include/zconf.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/sys/types.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/features.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/sys/cdefs.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/wordsize.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/gnu/stubs.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/gnu/stubs-hard.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/types.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/typesizes.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/time.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/lib/gcc/arm-linux-gnueabihf/4.8.3/include/stddef.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/endian.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/endian.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/byteswap.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/byteswap-16.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/sys/select.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/select.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/sigset.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/time.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/sys/sysmacros.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/pthreadtypes.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/unistd.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/posix_opt.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/environments.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/confname.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/getopt.h:
+
+pngconf.h:
+
+config.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/stdio.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/libio.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/_G_config.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/wchar.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/lib/gcc/arm-linux-gnueabihf/4.8.3/include/stdarg.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/stdio_lim.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/sys_errlist.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/setjmp.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/setjmp.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/string.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/xlocale.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/stdlib.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/waitflags.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/waitstatus.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/alloca.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/stdlib-float.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/math.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/huge_val.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/huge_valf.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/huge_vall.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/inf.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/nan.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/mathdef.h:
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/bits/mathcalls.h:
