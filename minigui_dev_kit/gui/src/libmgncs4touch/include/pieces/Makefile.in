@@ -341,7 +341,8 @@ HEAD_FILES = \
     mwidgethostpiece.h \
     mwrappaintpiece.h \
     mscrollviewpiece.h \
-    mhscrollviewpiece.h
+    mhscrollviewpiece.h \
+    mtimepiece.h
 
 libmgncs4touchinclude_HEADERS = $(HEAD_FILES)
 all: all-am
