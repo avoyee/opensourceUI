@@ -2047,11 +2047,14 @@ BOOL BitmapHWACCELScaler(
     memset(&stOpt, 0, sizeof(stOpt));
     memset(&stColorKey,0,sizeof(stColorKey));
 
-    stColorKey.bEnColorKey = TRUE;
-    stColorKey.eCKeyFmt = stSrc.eColorFmt;
-    stColorKey.eCKeyOp = E_MI_GFX_RGB_OP_EQUAL;
-    stColorKey.stCKeyVal.u32ColorStart = src_bmp->bmColorKey;
-    stColorKey.stCKeyVal.u32ColorEnd = src_bmp->bmColorKey;
+    if(src_bmp->bmType & BMP_TYPE_COLORKEY)
+    {
+        stColorKey.bEnColorKey = TRUE;
+        stColorKey.eCKeyFmt = stSrc.eColorFmt;
+        stColorKey.eCKeyOp = E_MI_GFX_RGB_OP_EQUAL;
+        stColorKey.stCKeyVal.u32ColorStart = src_bmp->bmColorKey;
+        stColorKey.stCKeyVal.u32ColorEnd = src_bmp->bmColorKey;
+    }
     
     stOpt.eSrcDfbBldOp = E_MI_GFX_DFB_BLD_SRCALPHA;
     stOpt.eDstDfbBldOp = E_MI_GFX_DFB_BLD_INVSRCALPHA;
