@@ -1,0 +1,13 @@
+prefix=/home/yongliang.li/test/gui/library
+exec_prefix=/home/yongliang.li/test/gui/library
+libdir=${exec_prefix}/lib
+sharedlibdir=${libdir}
+includedir=${prefix}/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.11
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
