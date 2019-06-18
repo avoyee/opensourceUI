@@ -1,0 +1,12 @@
+prefix=/home/yongliang.li/i2/gui/libarary
+exec_prefix=/home/yongliang.li/i2/gui/libarary
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: mGNCS
+Description: The New Control Set of MiniGUI
+Version: 1.2.0
+Requires:
+Libs: -L${libdir} -lmgncs  -L/home/yongliang.li/i2/project/gui/libarary/lib -lmgplus -lfreetype -lpthread -lstdc++   -L/home/yongliang.li/i2/project/gui/libarary/lib -lmgutils -lminigui_procs -ljpeg -lpng -lm -lts -lfreetype  
+libs.private:
+CFlags: -I${includedir}

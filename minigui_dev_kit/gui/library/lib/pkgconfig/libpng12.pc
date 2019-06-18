@@ -1,0 +1,11 @@
+prefix=/home/yongliang.li/i2/gui/libarary
+exec_prefix=/home/yongliang.li/i2/gui/libarary
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include/libpng12
+
+Name: libpng
+Description: Loads and saves PNG files
+Version: 1.2.37
+Libs: -L${libdir} -lpng12
+Libs.private: -lm 
+Cflags: -I${includedir} 
