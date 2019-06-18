@@ -1,0 +1,7 @@
+vxworks_sem.lo: vxworks_sem.c \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/stdc-predef.h \
+ ../../mgconfig.h
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/stdc-predef.h:
+
+../../mgconfig.h:

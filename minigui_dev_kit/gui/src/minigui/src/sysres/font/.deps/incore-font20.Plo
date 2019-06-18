@@ -1,0 +1,4 @@
+incore-font20.lo: incore-font20.c \
+ /opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/stdc-predef.h
+
+/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/arm-linux-gnueabihf/libc/usr/include/stdc-predef.h:
