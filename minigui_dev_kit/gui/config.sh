@@ -9,6 +9,7 @@ UAPIINC=$6
 MINIGUI_CROSS_COMPILE=$7
 PLAT_DEPENDENT_LIB=$8
 GRAPHICACCEL=$9
+export PATH=$PATH:${EPREFIX}/bin
 cd ${MODULE}
 if [ -e "configure" ]; then
 touch ./configure
