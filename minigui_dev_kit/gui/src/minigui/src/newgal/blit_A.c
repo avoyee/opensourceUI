@@ -60,12 +60,12 @@ static void BlitNto1SurfaceAlpha(GAL_BlitInfo *info)
             DUFFS_LOOP4(
             {
                 Uint32 pixel;
-                unsigned sR;
-                unsigned sG;
-                unsigned sB;
-                unsigned dR;
-                unsigned dG;
-                unsigned dB;
+                signed sR;
+                signed sG;
+                signed sB;
+                signed dR;
+                signed dG;
+                signed dB;
                 DISEMBLE_RGB(src, srcbpp, srcfmt, pixel, sR, sG, sB);
                 dR = dstfmt->palette->colors[*dst].r;
                 dG = dstfmt->palette->colors[*dst].g;
@@ -112,13 +112,13 @@ static void BlitNto1PixelAlpha(GAL_BlitInfo *info)
             DUFFS_LOOP4(
             {
                 Uint32 pixel;
-                unsigned sR;
-                unsigned sG;
-                unsigned sB;
-                unsigned sA;
-                unsigned dR;
-                unsigned dG;
-                unsigned dB;
+                signed sR;
+                signed sG;
+                signed sB;
+                signed sA;
+                signed dR;
+                signed dG;
+                signed dB;
                 DISEMBLE_RGBA(src,srcbpp,srcfmt,pixel,sR,sG,sB,sA);
                 dR = dstfmt->palette->colors[*dst].r;
                 dG = dstfmt->palette->colors[*dst].g;
@@ -167,12 +167,12 @@ static void BlitNto1SurfaceAlphaKey(GAL_BlitInfo *info)
             DUFFS_LOOP(
             {
                 Uint32 pixel;
-                unsigned sR;
-                unsigned sG;
-                unsigned sB;
-                unsigned dR;
-                unsigned dG;
-                unsigned dB;
+                signed sR;
+                signed sG;
+                signed sB;
+                signed dR;
+                signed dG;
+                signed dB;
                 DISEMBLE_RGB(src, srcbpp, srcfmt, pixel, sR, sG, sB);
                 if ( pixel != ckey ) {
                     dR = dstfmt->palette->colors[*dst].r;
@@ -599,12 +599,12 @@ static void BlitNtoNSurfaceAlpha(GAL_BlitInfo *info)
             DUFFS_LOOP4(
             {
                 Uint32 pixel;
-                unsigned sR;
-                unsigned sG;
-                unsigned sB;
-                unsigned dR;
-                unsigned dG;
-                unsigned dB;
+                signed sR;
+                signed sG;
+                signed sB;
+                signed dR;
+                signed dG;
+                signed dB;
                 DISEMBLE_RGB(src, srcbpp, srcfmt, pixel, sR, sG, sB);
                 DISEMBLE_RGB(dst, dstbpp, dstfmt, pixel, dR, dG, dB);
                 ALPHA_BLEND(sR, sG, sB, sA, dR, dG, dB);
@@ -639,12 +639,12 @@ static void BlitNtoNSurfaceAlphaKey(GAL_BlitInfo *info)
             DUFFS_LOOP4(
             {
                 Uint32 pixel;
-                unsigned sR;
-                unsigned sG;
-                unsigned sB;
-                unsigned dR;
-                unsigned dG;
-                unsigned dB;
+                signed sR;
+                signed sG;
+                signed sB;
+                signed dR;
+                signed dG;
+                signed dB;
                 RETRIEVE_RGB_PIXEL(src, srcbpp, pixel);
                 if(pixel != ckey) {
                     RGB_FROM_PIXEL(pixel, srcfmt, sR, sG, sB);
@@ -690,14 +690,14 @@ static void BlitNtoNPixelAlpha(GAL_BlitInfo *info)
                         DUFFS_LOOP4(
                         {
                         Uint32 pixel;
-                        unsigned sR;
-                        unsigned sG;
-                        unsigned sB;
-                        unsigned dR;
-                        unsigned dG;
-                        unsigned dB;
-                        unsigned sA;
-                        unsigned dA;
+                        signed sR;
+                        signed sG;
+                        signed sB;
+                        signed dR;
+                        signed dG;
+                        signed dB;
+                        signed sA;
+                        signed dA;
                         DISEMBLE_RGBA(src, srcbpp, srcfmt, pixel, sR, sG, sB, sA);
                         DISEMBLE_RGBA(dst, dstbpp, dstfmt, pixel, dR, dG, dB, dA);
                         ALPHA_BLEND(sR, sG, sB, sA, dR, dG, dB);
@@ -716,14 +716,14 @@ static void BlitNtoNPixelAlpha(GAL_BlitInfo *info)
                         DUFFS_LOOP4(
                         {
                         Uint32 pixel;
-                        unsigned sR;
-                        unsigned sG;
-                        unsigned sB;
-                        unsigned dR;
-                        unsigned dG;
-                        unsigned dB;
-                        unsigned sA;
-                        unsigned dA;
+                        signed sR;
+                        signed sG;
+                        signed sB;
+                        signed dR;
+                        signed dG;
+                        signed dB;
+                        signed sA;
+                        signed dA;
                         DISEMBLE_RGBA(src, srcbpp, srcfmt, pixel, sR, sG, sB, sA);
                         DISEMBLE_RGBA(dst, dstbpp, dstfmt, pixel, dR, dG, dB, dA);
                         ALPHA_BLEND(sR, sG, sB, sA, dR, dG, dB);

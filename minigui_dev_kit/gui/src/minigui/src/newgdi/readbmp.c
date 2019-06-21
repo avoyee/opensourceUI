@@ -298,7 +298,7 @@ static int init_bitmap_from_mybmp(HDC hdc, PBITMAP bmp,
         bmp->bmType |= BMP_TYPE_ALPHACHANNEL;
         bmp->bmAlpha = my_bmp->alpha;
     } else
-        bmp->bmAlpha = 0;
+        bmp->bmAlpha = 0xFF;
 
     if(my_bmp->flags & MYBMP_ALPHA && my_bmp->depth == 32) {
         bmp->bmType |= BMP_TYPE_ALPHA;

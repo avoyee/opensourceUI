@@ -61,8 +61,6 @@ unsigned int GALFmtToMStarFmt(GAL_Surface *pSurface)
 
     return eGFXcolorFmt;
 }
-int Sstar_GFX_HWAccelFillRect(_THIS, GAL_Surface *dst, GAL_Rect *rect, Uint32 color);
-
 
 int Sstar_GFX_HWAccelBlit(GAL_Surface *src, GAL_Rect *srcrect, GAL_Surface *dst, GAL_Rect *dstrect)
 {
@@ -112,7 +110,7 @@ int Sstar_GFX_HWAccelBlit(GAL_Surface *src, GAL_Rect *srcrect, GAL_Surface *dst,
     stOpt.stClipRect.u32Height = 0;
     stOpt.u32GlobalSrcConstColor = 0xFF000000;
     stOpt.u32GlobalDstConstColor = 0xFF000000;
-
+    
     //MI_GFX_SetAlpha(TRUE, E_MI_GFX_COEF_ASRC, E_MI_GFX_ABL_FROM_ADST,src->format->alpha);
     GAL_GetRGB(src->format->colorkey, src->format, &keyR, &keyG, &keyB);
     /*

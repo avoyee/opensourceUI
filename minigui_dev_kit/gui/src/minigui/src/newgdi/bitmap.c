@@ -2013,8 +2013,6 @@ BOOL BitmapHWACCELScaler(
         }
     } else
         return FALSE;
-
-
     stDst.phyAddr = ABS(pdc->surface->phy_addr);
     stDst.eColorFmt = GALFmtToMStarFmt(pdc->surface);
     stDst.u32Width = info->pdc->surface->w ;
@@ -2047,6 +2045,18 @@ BOOL BitmapHWACCELScaler(
     memset(&stOpt, 0, sizeof(stOpt));
     memset(&stColorKey,0,sizeof(stColorKey));
 
+    if(src_bmp->bmType & BMP_TYPE_ALPHACHANNEL)
+    {
+        stOpt.u32GlobalSrcConstColor = (0xFF&src_bmp->bmAlpha)<<24;
+        stOpt.u32GlobalDstConstColor = 0xFF000000;
+        stOpt.eDFBBlendFlag = E_MI_GFX_DFB_BLEND_ALPHACHANNEL|E_MI_GFX_DFB_BLEND_COLORALPHA;
+    }
+    else
+    {
+        stOpt.u32GlobalSrcConstColor = 0xFF000000;
+        stOpt.u32GlobalDstConstColor = 0xFF000000;
+        stOpt.eDFBBlendFlag = E_MI_GFX_DFB_BLEND_ALPHACHANNEL|E_MI_GFX_DFB_BLEND_COLORALPHA;
+    }
     if(src_bmp->bmType & BMP_TYPE_COLORKEY)
     {
         stColorKey.bEnColorKey = TRUE;
@@ -2064,8 +2074,6 @@ BOOL BitmapHWACCELScaler(
     stOpt.stClipRect.s32Ypos = 0;
     stOpt.stClipRect.u32Width  = 0;
     stOpt.stClipRect.u32Height = 0;
-    stOpt.u32GlobalSrcConstColor = 0xFF000000;
-    stOpt.u32GlobalDstConstColor = 0xFF000000;
     stOpt.stSrcColorKeyInfo = stColorKey;
     //start = clock();
 /*

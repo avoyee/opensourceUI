@@ -348,6 +348,7 @@ int gpi_threadbody(void *arg)
     }
 
     destroy(fd);
+    free(fdset);
     return 0;
 }
 
@@ -439,6 +440,8 @@ int uhid_input_init(void)
     }
 
     pthread_create(&gpi_thread, NULL, (void*)gpi_threadbody, &num_keys);
+    ht_destroy(&ht);
+    ht_destroy(&ht_EVC2HIDC);
     return 0;
 }
 

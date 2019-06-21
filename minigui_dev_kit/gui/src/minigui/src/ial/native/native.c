@@ -510,7 +510,7 @@ found:
     input->set_leds = set_leds;
 
     input->wait_event = wait_event;
-    uhid_input_init();
+    //uhid_input_init();
 
     return TRUE;
 }
