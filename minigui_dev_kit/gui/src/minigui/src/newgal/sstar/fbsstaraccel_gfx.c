@@ -104,10 +104,6 @@ int Sstar_GFX_HWAccelBlit(GAL_Surface *src, GAL_Rect *srcrect, GAL_Surface *dst,
     stOpt.eDstDfbBldOp = E_MI_GFX_DFB_BLD_ZERO;
     stOpt.eMirror = E_MI_GFX_MIRROR_NONE;
     stOpt.eRotate = E_MI_GFX_ROTATE_0;
-    stOpt.stClipRect.s32Xpos = 0;
-    stOpt.stClipRect.s32Ypos = 0;
-    stOpt.stClipRect.u32Width  = 0;
-    stOpt.stClipRect.u32Height = 0;
     stOpt.u32GlobalSrcConstColor = 0xFF000000;
     stOpt.u32GlobalDstConstColor = 0xFF000000;
     
