@@ -138,7 +138,7 @@ int Sstar_GFX_HWAccelBlit(GAL_Surface *src, GAL_Rect *srcrect, GAL_Surface *dst,
     }
 */
     MI_GFX_BitBlit(&stSrc, &stSrcRect, &stDst, &stDstRect, &stOpt, &u16Fence);
-    //MI_GFX_WaitAllDone(FALSE, u16Fence);
+    MI_GFX_WaitAllDone(FALSE, u16Fence);
     //end = clock();
     //printf("%s %d %f %d %d\n", __FUNCTION__, __LINE__, (float)(end - start) / CLOCKS_PER_SEC, stDstRect.u32Width, stDstRect.u32Height);
     return TRUE ;
