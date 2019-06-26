@@ -1600,6 +1600,167 @@ static int _PutBoxKeyAlphaChannel(GAL_Surface *dst, BYTE *dstrow, BYTE *srcrow, 
     return 0;
 }
 
+#if defined (FB_ACCEL_SSTAR_GFX)
+#include "mi_common.h"
+#include "mi_gfx_datatype.h"
+#include "mi_gfx.h"
+#include "mi_sys.h"
+#include "time.h"
+extern unsigned int GALFmtToMStarFmt(GAL_Surface *pSurface);
+
+int GAL_PutBox(GAL_Surface *dst, const GAL_Rect *dstrect, BITMAP *box)
+{
+    Uint32 box_x, box_y, off_x, off_y;
+    int  w, h;
+    Uint8 *srcrow, *dstrow;
+    GAL_Rect my_dstrect;
+    //static BOOL once=TRUE;;
+    /* If 'dstrect' == NULL, then put to (0, 0) */
+    if(dstrect) {
+        box_x = dstrect->x;
+        box_y = dstrect->y;
+        /* Perform clipping */
+        if(!GAL_IntersectRect(dstrect, &dst->clip_rect, &my_dstrect)) {
+            return 0;
+        }
+    } else {
+        box_x = 0;
+        box_y = 0;
+        my_dstrect = dst->clip_rect;
+    }
+
+    off_x = my_dstrect.x - box_x;
+    off_y = my_dstrect.y - box_y;
+
+    if(off_x >= box->bmWidth || off_y >= box->bmHeight ||
+       box->bmBytesPerPixel != dst->format->BytesPerPixel) {
+        return 0;
+    }
+
+    dstrow = (Uint8 *)dst->pixels + my_dstrect.y * dst->pitch +
+             my_dstrect.x * dst->format->BytesPerPixel;
+    srcrow = (Uint8 *)box->bmBits + off_y * box->bmPitch +
+             off_x * box->bmBytesPerPixel;
+    
+    w = MIN(my_dstrect.w, box->bmWidth);
+    h = MIN(my_dstrect.h, box->bmHeight);
+    /*
+    if(once)
+    {
+        printf("%s %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",__FUNCTION__,__LINE__,\
+            my_dstrect.x,my_dstrect.y,my_dstrect.w,my_dstrect.h,\
+            dstrect->x,dstrect->y,dstrect->w,dstrect->h,\
+            box->bmWidth,box->bmHeight,off_x,off_y,box->bmPitch,dst->pitch);
+       // once=FALSE;
+    }
+    */
+    {
+
+        MI_GFX_Surface_t stSrc;
+        MI_GFX_Rect_t stSrcRect;
+        MI_GFX_Surface_t stDst;
+        MI_GFX_Rect_t stDstRect;
+        MI_GFX_Opt_t stOpt;
+        MI_U16 u16Fence;
+        MI_GFX_ColorKeyInfo_t stColorKey;
+        //clock_t start,end;
+
+
+        stDst.phyAddr = ABS(dst->phy_addr);
+        stDst.eColorFmt =GALFmtToMStarFmt(dst);
+        stDst.u32Width = dst->w ;
+        stDst.u32Height = dst->h ;
+        stDst.u32Stride = dst->pitch ;
+
+        stDstRect.s32Xpos = my_dstrect.x;
+        stDstRect.s32Ypos = my_dstrect.y;
+        stDstRect.u32Width =w;
+        stDstRect.u32Height = h;
+
+        stSrc.phyAddr = box->bmPhyAddr;
+        stSrc.eColorFmt = stDst.eColorFmt;
+
+        stSrc.u32Width = box->bmWidth ;
+        stSrc.u32Height = box->bmHeight ;
+        stSrc.u32Stride = box->bmPitch ;
+
+        stSrcRect.s32Xpos = off_x;
+        stSrcRect.s32Ypos = off_y;
+        stSrcRect.u32Width =  w;
+        stSrcRect.u32Height =  h;
+
+        memset(&stOpt, 0, sizeof(stOpt));
+        memset(&stColorKey, 0, sizeof(stColorKey));
+
+        if(box->bmType & BMP_TYPE_ALPHACHANNEL) {
+            stOpt.u32GlobalSrcConstColor = (0xFF & box->bmAlpha) << 24;
+            stOpt.u32GlobalDstConstColor = 0xFF000000;
+            stOpt.eDFBBlendFlag = E_MI_GFX_DFB_BLEND_ALPHACHANNEL | E_MI_GFX_DFB_BLEND_COLORALPHA;
+        } else {
+            stOpt.u32GlobalSrcConstColor = 0xFF000000;
+            stOpt.u32GlobalDstConstColor = 0xFF000000;
+            //stOpt.eDFBBlendFlag = E_MI_GFX_DFB_BLEND_ALPHACHANNEL|E_MI_GFX_DFB_BLEND_COLORALPHA;
+        }
+
+        if(box->bmType & BMP_TYPE_COLORKEY) {
+            stColorKey.bEnColorKey = TRUE;
+            stColorKey.eCKeyFmt = stSrc.eColorFmt;
+            stColorKey.eCKeyOp = E_MI_GFX_RGB_OP_EQUAL;
+            stColorKey.stCKeyVal.u32ColorStart = box->bmColorKey;
+            stColorKey.stCKeyVal.u32ColorEnd = box->bmColorKey;
+        }
+
+        stOpt.eSrcDfbBldOp = E_MI_GFX_DFB_BLD_SRCALPHA;
+        stOpt.eDstDfbBldOp = E_MI_GFX_DFB_BLD_INVSRCALPHA;
+        stOpt.eMirror = E_MI_GFX_MIRROR_NONE;
+        stOpt.eRotate = E_MI_GFX_ROTATE_0;
+        stOpt.stClipRect.s32Xpos =  stDstRect.s32Xpos;
+        stOpt.stClipRect.s32Ypos = stDstRect.s32Ypos;
+        stOpt.stClipRect.u32Width  =  stDstRect.u32Width;
+        stOpt.stClipRect.u32Height =  stDstRect.u32Height;
+        stOpt.stSrcColorKeyInfo = stColorKey;
+        //start = clock();
+        /*
+            if(box->bmPhyAddr)
+                MI_SYS_FlushInvCache(box->bmBits, box->bmHeight * box->bmPitch);
+
+            if(pdc->surface->phy_addr < 0) {
+                MI_SYS_FlushInvCache(pdc->surface->pixels, pdc->surface->h * pdc->surface->pitch);
+            }
+        */
+        MI_GFX_BitBlit(&stSrc, &stSrcRect, &stDst, &stDstRect, &stOpt, &u16Fence);
+        //MI_GFX_WaitAllDone(FALSE, u16Fence);
+        //end = clock();
+        //printf("%s %d %f %d %d\n", __FUNCTION__, __LINE__, (float)(end - start) / CLOCKS_PER_SEC, stDstRect.u32Width, stDstRect.u32Height);
+        return 0 ;
+
+    }
+    /* TODO: Check for hardware acceleration here */
+    if(box->bmType & BMP_TYPE_ALPHA) {
+        if((box->bmType & BMP_TYPE_ALPHACHANNEL) && (box->bmType & BMP_TYPE_COLORKEY)) {
+            return _PutBoxKeyAlphaChannelEx(dst, dstrow, srcrow, w, h, box);
+        }
+
+        if((box->bmType & BMP_TYPE_ALPHACHANNEL)) {
+            return _PutBoxAlphaChannelEx(dst, dstrow, srcrow, w, h, box);
+        } else if((box->bmType & BMP_TYPE_ALPHA) && (box->bmType & BMP_TYPE_COLORKEY)) {
+            return _PutBoxKeyAlpha(dst, dstrow, srcrow, w, h, box);
+        } else if(box->bmType & BMP_TYPE_ALPHA) {
+            return _PutBoxAlpha(dst, dstrow, srcrow, w, h, box);
+        }
+    } else if((box->bmType & BMP_TYPE_ALPHACHANNEL) && (box->bmType & BMP_TYPE_COLORKEY)) {
+        return _PutBoxKeyAlphaChannel(dst, dstrow, srcrow, w, h, box);
+    } else if(box->bmType & BMP_TYPE_COLORKEY) {
+        return _PutBoxKey(dst, dstrow, srcrow, w, h, box);
+    } else if(box->bmType & BMP_TYPE_ALPHACHANNEL) {
+        return _PutBoxAlphaChannel(dst, dstrow, srcrow, w, h, box);
+    }
+
+    return 0;
+}
+
+
+#else
 int GAL_PutBox(GAL_Surface *dst, const GAL_Rect *dstrect, BITMAP *box)
 {
     Uint32 box_x, box_y, off_x, off_y;
@@ -1734,6 +1895,7 @@ slow_copy:
     return 0;
 }
 
+#endif
 /*
  * Convert a surface into the specified pixel format.
  */
