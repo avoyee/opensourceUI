@@ -120,6 +120,7 @@ extern void refresh_hflip_msb_right (ShadowFBHeader* shadowfb_header, RealFBInfo
 
 extern void refresh_vflip_msb_right (ShadowFBHeader* shadowfb_header, RealFBInfo* realfb_info, void* update);
 
+extern void hwrefresh_normal_msb_right (ShadowFBHeader * shadowfb_header, RealFBInfo *realfb_info, void* update);
 extern int refresh_init(int pitch);
 
 extern void refresh_destroy(void);
@@ -145,6 +146,7 @@ static void SHADOW_FreeHWSurface (_THIS, GAL_Surface *surface);
 /* for task_do_update */
 static int run_flag = 0;
 static int end_flag = 0;
+ GAL_Surface shadow_canvas;
 
 #ifdef _MGRM_PROCESSES
 static int shmid;
@@ -358,7 +360,7 @@ static int RealEngine_GetInfo (RealFBInfo * realfb_info)
         else if (realfb_info->flags & _ROT_DIR_VFLIP)
             __mg_shadow_fb_ops->refresh = refresh_vflip_msb_right;
         else
-            __mg_shadow_fb_ops->refresh = refresh_normal_msb_right;
+            __mg_shadow_fb_ops->refresh = hwrefresh_normal_msb_right;
     }
 
     refresh_init (pitch_size);
@@ -488,6 +490,7 @@ static void* task_do_update (void* data)
         if (__gal_screen !=NULL) {
             break;
         }
+        usleep(1000);
     }
 
     for (;;) {
@@ -664,8 +667,19 @@ static GAL_Surface *SHADOW_SetVideoMode(_THIS, GAL_Surface *current,
         size += PALETTE_SIZE;
 
     size += sizeof (ShadowFBHeader);
-    _shadowfbheader = (ShadowFBHeader *) malloc (size);
+    
     memcpy(_shadowfbheader, &shadowfbheader, sizeof(ShadowFBHeader));
+#ifdef _MGGAL_SSTAR
+    shadow_canvas.w = width;
+    shadow_canvas.h = height;
+    canshadow_canvasvas.pitch = this->hidden->realfb_info->real_device->screen->pitch;
+    SHADOW_AllocHWSurface(this,&shadow_canvas);
+    _shadowfbheader->pixels =  shadow_canvas.pixels;
+    _shadowfbheader->phy_addr =  shadow_canvas.phy_addr;
+#else
+    _shadowfbheader = (ShadowFBHeader *) malloc (size);
+    _shadowfbheader->pixels =NULL;
+#endif
 
     /* INIT  Share Memory  ShadowFBHeader */
     this->hidden->realfb_info = realfb_info;
@@ -705,6 +719,7 @@ static GAL_Surface *SHADOW_SetVideoMode(_THIS, GAL_Surface *current,
     current->h = _shadowfbheader->height;
     current->pitch = _shadowfbheader->pitch;
     current->pixels = (char *)_shadowfbheader + _shadowfbheader->fb_offset;
+    current->phy_addr = _shadowfbheader->phy_addr;
     #ifdef _MGGAL_SSTAR
     FB_SstarAccel(this);
     #endif

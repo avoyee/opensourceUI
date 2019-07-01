@@ -47,6 +47,7 @@ extern "C" {
 typedef struct _ShadowFBHeader {
         unsigned int info_size;
         long long phy_addr;
+        void* pixels;
         int width;
         int height;
         int depth;

@@ -263,6 +263,93 @@ void _get_src_rect_ccw (const RECT* dst_rect, RECT* src_rect, RealFBInfo *realfb
     src_rect->bottom = dst_rect->right;
 }
 
+#if defined (FB_ACCEL_SSTAR_GFX)
+#include "mi_common.h"
+#include "mi_gfx_datatype.h"
+#include "mi_gfx.h"
+#include "mi_sys.h"
+#include "time.h"
+extern unsigned int GALFmtToMStarFmt(GAL_Surface *pSurface);
+
+
+void hwrefresh_normal_msb_right (ShadowFBHeader * shadowfb_header, RealFBInfo *realfb_info,
+                void* update)
+{
+    RECT src_update ;
+    int width, height;
+    
+    //clock_t start,end;
+    src_update.left = ((RECT*)update)->left;
+    src_update.right = ((RECT*)update)->right;
+    src_update.top = ((RECT*)update)->top;
+    src_update.bottom = ((RECT*)update)->bottom;
+                
+    /* Round the update rectangle.  */
+    round_rect (realfb_info->depth, &src_update);
+    
+    width = RECTW (src_update);
+    height = RECTH (src_update);
+
+    if (width <= 0 || height <= 0){
+       return;
+    }
+    
+    MI_GFX_Surface_t stSrc;
+    MI_GFX_Rect_t stSrcRect;
+    MI_GFX_Surface_t stDst;
+    MI_GFX_Rect_t stDstRect;
+    MI_GFX_Opt_t stOpt;
+    MI_U16 u16Fence;
+
+    memset(&stOpt, 0, sizeof(stOpt));
+    stDst.phyAddr =ABS(realfb_info->phy_addr);
+    stDst.eColorFmt = GALFmtToMStarFmt(((GAL_VideoDevice*)realfb_info->real_device)->screen);
+    stDst.u32Width = realfb_info->width ;
+    stDst.u32Height = realfb_info->height ;
+    stDst.u32Stride = realfb_info->pitch ;
+
+    stDstRect.s32Xpos = src_update.left;
+    stDstRect.s32Ypos = src_update.top;
+    stDstRect.u32Width =  width;
+    stDstRect.u32Height = height;
+
+
+
+    stSrc.phyAddr = ABS(shadowfb_header->phy_addr);
+    stSrc.eColorFmt = GALFmtToMStarFmt(((GAL_VideoDevice*)realfb_info->real_device)->screen);
+
+    stSrc.u32Width = shadowfb_header->width ;
+    stSrc.u32Height = shadowfb_header->height ;
+    stSrc.u32Stride = shadowfb_header->pitch ;
+
+    stSrcRect.s32Xpos = src_update.left;
+    stSrcRect.s32Ypos = src_update.top;
+    stSrcRect.u32Width = width;
+    stSrcRect.u32Height = height;
+
+    stOpt.stClipRect.s32Xpos = stDstRect.s32Xpos;
+    stOpt.stClipRect.s32Ypos = stDstRect.s32Ypos;
+    stOpt.stClipRect.u32Width  = stDstRect.u32Width;
+    stOpt.stClipRect.u32Height = stDstRect.u32Height;
+
+    
+    stOpt.u32GlobalSrcConstColor = 0xFF000000;
+    stOpt.u32GlobalDstConstColor = 0xFF000000;
+    stOpt.eSrcDfbBldOp = E_MI_GFX_DFB_BLD_ONE;
+    stOpt.eDstDfbBldOp = E_MI_GFX_DFB_BLD_ZERO;
+    stOpt.eMirror = E_MI_GFX_MIRROR_NONE;
+    stOpt.eRotate = E_MI_GFX_ROTATE_0;
+    //start = clock();
+
+    MI_GFX_BitBlit(&stSrc, &stSrcRect, &stDst, &stDstRect, &stOpt, &u16Fence);
+    MI_GFX_WaitAllDone(FALSE, u16Fence);
+    //end = clock();
+    //printf("%s %d %f %d %d\n", __FUNCTION__, __LINE__, (float)(end - start) / CLOCKS_PER_SEC, stDstRect.u32Width, stDstRect.u32Height);
+
+
+}
+#endif
+
 void refresh_cw_msb_right (ShadowFBHeader *shadowfb_header, RealFBInfo *realfb_info, void* update)
 {
     RECT src_update = *(RECT*)update;
