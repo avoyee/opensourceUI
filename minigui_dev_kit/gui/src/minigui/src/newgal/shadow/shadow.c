@@ -145,8 +145,9 @@ static void SHADOW_FreeHWSurface (_THIS, GAL_Surface *surface);
 /* for task_do_update */
 static int run_flag = 0;
 static int end_flag = 0;
+#ifdef _MGGAL_SSTAR
  GAL_Surface shadow_canvas;
-
+#endif
 #ifdef _MGRM_PROCESSES
 static int shmid;
 /* Down/up a semaphore uninterruptablly. */
@@ -671,7 +672,7 @@ static GAL_Surface *SHADOW_SetVideoMode(_THIS, GAL_Surface *current,
 #ifdef _MGGAL_SSTAR
     shadow_canvas.w = width;
     shadow_canvas.h = height;
-    canshadow_canvasvas.pitch = this->hidden->realfb_info->real_device->screen->pitch;
+    shadow_canvas.pitch = this->hidden->realfb_info->real_device->screen->pitch;
     SHADOW_AllocHWSurface(this,&shadow_canvas);
     _shadowfbheader->pixels =  shadow_canvas.pixels;
     _shadowfbheader->phy_addr =  shadow_canvas.phy_addr;
@@ -943,6 +944,9 @@ static void SHADOW_VideoQuit (_THIS)
         tmp = _shadowfbheader;
         _shadowfbheader = NULL;
         shmdt (tmp);
+#ifdef _MGGAL_SSTAR
+        SHADOW_FreeHWSurface(this, &shadow_canvas);
+#endif
         __mg_shadow_fb_ops->release(this->hidden->realfb_info);
 
         if (shmctl (shmid, IPC_RMID, NULL))
