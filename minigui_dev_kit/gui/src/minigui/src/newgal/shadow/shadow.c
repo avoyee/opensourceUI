@@ -126,6 +126,9 @@ extern void refresh_destroy(void);
 #ifdef WIN32
 extern int win_sleep(int);
 #endif
+#ifdef _MGGAL_SSTAR
+extern void FB_SstarAccel(_THIS);
+#endif
 
 /* Initialization/Query functions */
 static int SHADOW_VideoInit (_THIS, GAL_PixelFormat *vformat);
@@ -315,6 +318,7 @@ static int RealEngine_GetInfo (RealFBInfo * realfb_info)
     realfb_info->fb = real_device->screen->pixels;
     realfb_info->pitch = real_device->screen->pitch;
     realfb_info->flags = 0; 
+    realfb_info->phy_addr = real_device->screen->phy_addr;
 
     if (realfb_info->depth <= 8)
         pitch_size = realfb_info->width;
@@ -701,7 +705,9 @@ static GAL_Surface *SHADOW_SetVideoMode(_THIS, GAL_Surface *current,
     current->h = _shadowfbheader->height;
     current->pitch = _shadowfbheader->pitch;
     current->pixels = (char *)_shadowfbheader + _shadowfbheader->fb_offset;
-
+    #ifdef _MGGAL_SSTAR
+    FB_SstarAccel(this);
+    #endif
     {
         pthread_attr_t new_attr;
 
@@ -814,7 +820,7 @@ static GAL_Surface *SHADOW_SetVideoMode(_THIS, GAL_Surface *current,
         }
 
         shadowfbheader.pitch = ((shadowfbheader.width * shadowfbheader.depth) + 31) / 32*4;
-
+        shadowfbheader.phy_addr = realfb_info->phy_addr;
         size = shadowfbheader.pitch * shadowfbheader.height;
         if(shadowfbheader.depth <= 8)
             size += PALETTE_SIZE;
@@ -878,7 +884,10 @@ static GAL_Surface *SHADOW_SetVideoMode(_THIS, GAL_Surface *current,
     current->h = _shadowfbheader->height;
     current->pitch = _shadowfbheader->pitch;
     current->pixels = (char *)(_shadowfbheader) + _shadowfbheader->fb_offset;
-
+    current->phy_addr = _shadowfbheader->phy_addr;
+#ifdef _MGGAL_SSTAR
+    FB_SstarAccel(this);
+#endif
     if (mgIsServer) {
         pthread_attr_t new_attr;
 
@@ -941,12 +950,16 @@ static GAL_Rect **SHADOW_ListModes (_THIS, GAL_PixelFormat *format,
 /* We don't actually allow hardware surfaces other than the main one */
 static int SHADOW_AllocHWSurface (_THIS, GAL_Surface *surface)
 {
-    return -1;
+    GAL_VideoDevice *real_device;
+    real_device = this->hidden->realfb_info->real_device;
+    return real_device->AllocHWSurface(this,surface);
 }
 
 static void SHADOW_FreeHWSurface (_THIS, GAL_Surface *surface)
 {
-    surface->pixels = NULL;
+    GAL_VideoDevice *real_device;
+    real_device = this->hidden->realfb_info->real_device;
+    return real_device->FreeHWSurface(this,surface);
 }
 
 static int SHADOW_SetColors (_THIS, int firstcolor, int ncolors, 

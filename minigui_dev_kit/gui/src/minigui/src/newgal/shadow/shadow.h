@@ -46,6 +46,7 @@ extern "C" {
 
 typedef struct _ShadowFBHeader {
         unsigned int info_size;
+        long long phy_addr;
         int width;
         int height;
         int depth;
@@ -73,6 +74,7 @@ typedef struct _RealFBInfo {
         int pitch;
         void* fb;
         void * real_device;
+        long long phy_addr;
 } RealFBInfo;
 
 /* Private display data */
