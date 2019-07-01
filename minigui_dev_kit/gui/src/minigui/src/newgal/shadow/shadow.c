@@ -120,7 +120,6 @@ extern void refresh_hflip_msb_right (ShadowFBHeader* shadowfb_header, RealFBInfo
 
 extern void refresh_vflip_msb_right (ShadowFBHeader* shadowfb_header, RealFBInfo* realfb_info, void* update);
 
-extern void hwrefresh_normal_msb_right (ShadowFBHeader * shadowfb_header, RealFBInfo *realfb_info, void* update);
 extern int refresh_init(int pitch);
 
 extern void refresh_destroy(void);
@@ -360,7 +359,7 @@ static int RealEngine_GetInfo (RealFBInfo * realfb_info)
         else if (realfb_info->flags & _ROT_DIR_VFLIP)
             __mg_shadow_fb_ops->refresh = refresh_vflip_msb_right;
         else
-            __mg_shadow_fb_ops->refresh = hwrefresh_normal_msb_right;
+            __mg_shadow_fb_ops->refresh = refresh_normal_msb_right;
     }
 
     refresh_init (pitch_size);

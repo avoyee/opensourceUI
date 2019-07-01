@@ -348,8 +348,7 @@ void hwrefresh_normal_msb_right (ShadowFBHeader * shadowfb_header, RealFBInfo *r
 
 
 }
-#endif
-
+#else
 void refresh_cw_msb_right (ShadowFBHeader *shadowfb_header, RealFBInfo *realfb_info, void* update)
 {
     RECT src_update = *(RECT*)update;
@@ -450,7 +449,7 @@ void refresh_cw_msb_right (ShadowFBHeader *shadowfb_header, RealFBInfo *realfb_i
         }
     }
 }
-
+#endif
 void refresh_ccw_msb_right (ShadowFBHeader* shadowfb_header, RealFBInfo* realfb_info, void* update)
 {
     RECT src_update = *(RECT*)update;
