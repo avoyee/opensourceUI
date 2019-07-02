@@ -1992,7 +1992,7 @@ BOOL BitmapHWACCELScaler(
     //int i = 0;
 
     cliprect = pdc->ecrgn.head;
-
+    
     if(pdc->rop == ROP_SET) {
         if(IntersectRect(&eff_rc, &pdc->rc_output, &cliprect->rc)) {
             /*

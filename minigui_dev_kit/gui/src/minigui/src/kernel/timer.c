@@ -84,7 +84,7 @@ static pthread_mutex_t timerLock;
 
 #ifdef _MG_USE_BETTER_TIMER
 #include <sys/times.h>
-//static clock_t g_timer_started;
+static clock_t g_timer_started;
 static clock_t g_last_tick;
 #endif
 

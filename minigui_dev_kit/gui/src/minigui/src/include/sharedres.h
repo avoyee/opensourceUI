@@ -145,7 +145,6 @@ typedef G_RES* PG_RES;
 #define SHAREDRES_DEF_NR_TOPMOSTS   (((PG_RES)mgSharedRes)->def_nr_topmosts)
 #define SHAREDRES_DEF_NR_NORMALS    (((PG_RES)mgSharedRes)->dev_nr_normals)
 
-#define SHAREDRES_PIXELS    (((PG_RES)mgSharedRes)->pixel)
 #ifdef __cplusplus
 extern "C" {
 #endif  /* __cplusplus */

@@ -742,6 +742,10 @@ static GAL_Surface *SHADOW_SetVideoMode(_THIS, GAL_Surface *current,
         pthread_attr_setdetachstate (&new_attr, PTHREAD_CREATE_DETACHED);
         ret = pthread_create (&this->hidden->update_th, &new_attr, 
                         task_do_update, this);
+        
+        if (ret != 0) {
+            fprintf (stderr, "NEWGAL>SHADOW: Couldn't start updater\n");
+        }
         pthread_attr_destroy (&new_attr);
     }
 

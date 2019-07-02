@@ -8,6 +8,7 @@
 #include "mstarFb.h"
 #include "fbsstaraccel.h"
 
+
 #if defined(FB_ACCEL_SSTAR_GFX)
 // TODO:: change impl & name
 unsigned int GALFmtToMStarFmt(GAL_Surface *pSurface)
@@ -151,6 +152,7 @@ int Sstar_GFX_HWAccelFillRect(_THIS, GAL_Surface *dst, GAL_Rect *rect, Uint32 co
     MI_U16 u16Fence;
     //void *A = NULL;
     MI_U8  a,r,g,b;
+    //clock_t start,end;
     stDst.phyAddr = ABS(dst->phy_addr);
 
 

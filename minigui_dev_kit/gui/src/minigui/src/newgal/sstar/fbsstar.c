@@ -652,7 +652,6 @@ static GAL_Surface *FB_SetVideoMode(_THIS, GAL_Surface *current,
     int surfaces_len;
     char windowCnt = 1;
 #ifdef _MGRM_PROCESSES
-
     if (mgIsServer)
 #endif
     {
@@ -923,7 +922,9 @@ static GAL_Surface *FB_SetVideoMode(_THIS, GAL_Surface *current,
 
 #ifdef _MGRM_PROCESSES
 
-    if (rotation && mgIsServer)
+    if(rotation && mgIsServer)
+#else
+    if(rotation)
     {
         pthread_attr_t new_attr;
         pthread_attr_init(&new_attr);
@@ -938,11 +939,12 @@ static GAL_Surface *FB_SetVideoMode(_THIS, GAL_Surface *current,
 
         if (ret < 0)
         {
+            fprintf (stderr, "NEWGAL>SSTAR: Couldn't start updater\n");
         }
     }
 
 #endif
-
+    fprintf(stderr, "%s %d %llx\n",__FUNCTION__,__LINE__,current->phy_addr);
     /* We're done */
     return (current);
 }
@@ -1313,7 +1315,6 @@ static void FB_FreeHWSurface(_THIS, GAL_Surface *surface)
     REQ_HWSURFACE request = {surface->w, surface->h, surface->pitch, 0, surface->hwdata};
     REP_HWSURFACE reply = {0, 0};
     request.offset = (char *)surface->pixels - (char *)mapped_mem;
-    REQUEST req;
     vidmem_bucket *bucket = request.bucket;
     if((surface->flags & GAL_PREALLOC) == GAL_PREALLOC)
     {
@@ -1353,6 +1354,8 @@ static void FB_FreeHWSurface(_THIS, GAL_Surface *surface)
         }
         else
         {
+            
+            REQUEST req;
             request.bucket = surface->hwdata;
 
             req.id = REQID_HWSURFACE;
@@ -1364,7 +1367,17 @@ static void FB_FreeHWSurface(_THIS, GAL_Surface *surface)
     }
 
 #else
-    FB_RequestHWSurface(this, &request, &reply);
+    if (surface->phy_addr < 0)
+    {
+        GAL_SetError("NEWGAL>FBCON[%s][%d]:free MMA %llx\n", __FUNCTION__, __LINE__, bucket->phy_addr);
+        MI_SYS_Munmap(bucket->virt_addr, bucket->size);
+        MI_SYS_MMA_Free(bucket->phy_addr);
+        free(bucket);
+    }
+    else
+    {
+        FB_RequestHWSurface(this, &request, &reply);
+    }
 #endif
 
     surface->pixels = NULL;
@@ -1506,59 +1519,7 @@ static void FB_UpdateRects(_THIS, int numrects,
 
     unlock_fbh(bucket->semid);
 }
-void swap_surface(_THIS, GAL_Surface *front, GAL_Surface *back, BOOL bSwapFB)
-{
-    //vidmem_bucket *bucket_front = (vidmem_bucket *)front->hwdata;
-    //vidmem_bucket *bucket_back = (vidmem_bucket *)back->hwdata;
-    //void *temp = front->hwdata;
 
-    static BOOL i = FALSE;
-    /*
-    if(bSwapFB)
-    {
-        if (cache_vinfo.yoffset == 0)
-            cache_vinfo.yoffset = cache_vinfo.yres;
-        else
-            cache_vinfo.yoffset = 0;
-        if (ioctl(console_fd, FBIOPUT_VSCREENINFO, &cache_vinfo) < 0)
-        {
-            GAL_SetError("NEWGAL>FBCON: Couldn't get console hardware info");
-        }
-    }
-    front->hwdata = back->hwdata;
-    back->hwdata = temp;
-    */
-    back->pixels = ((vidmem_bucket *)back->hwdata)->base;
-    front->pixels = ((vidmem_bucket *)front->hwdata)->base;
-
-    SHAREDRES_PIXELS = i ? (unsigned long)front->pixels : (unsigned long)back->pixels;
-    i = i ^ 1;
-}
-void refresh_fb_native(_THIS, RECT *dirty_rect, int bswap)
-{
-    GAL_Rect src = {0};
-    GAL_Rect dst = {0};
-
-    RECT intersect_rect;
-    RECT surface_rect;
-    SetRect(&surface_rect, 0, 0, GAL_VideoSurface->w, GAL_VideoSurface->h);
-
-    if (IntersectRect(&intersect_rect, &surface_rect, dirty_rect))
-    {
-
-        dst.x = intersect_rect.left;
-        dst.y = intersect_rect.top;
-        dst.w = intersect_rect.right - intersect_rect.left;
-        dst.h = intersect_rect.bottom - intersect_rect.top;
-
-        src.x = dst.x - surface_rect.left;
-        src.y = dst.y - surface_rect.top;
-        src.w = dst.w;
-        src.h = dst.h;
-        GAL_BlitSurface(GAL_VideoSurface, &src, canvas, &dst);
-        swap_surface(this, GAL_VideoSurface, canvas, TRUE);
-    }
-}
 #include <time.h>
 static void *task_do_update(_THIS)
 {

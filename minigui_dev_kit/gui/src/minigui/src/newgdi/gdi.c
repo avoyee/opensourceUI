@@ -262,7 +262,7 @@ BOOL mg_InitGDI(void)
         goto error;
     }
 
-    INIT_SPECIFICAL_FONTS(FONT_ETC_SECTION_NAME_TTF);
+    //INIT_SPECIFICAL_FONTS(FONT_ETC_SECTION_NAME_TTF);
 #endif
 
     /* TODO: add other font support here */

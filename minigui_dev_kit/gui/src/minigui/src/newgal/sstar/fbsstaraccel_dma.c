@@ -8,6 +8,9 @@
 #include "blit.h"
 #include "mstarFb.h"
 #include "fbsstaraccel.h"
+#include "mi_sys_datatype.h"
+#include "mi_sys.h"
+
 #if defined(FB_ACCEL_SSTAR_DMA)
 
 int Sstar_DMA_HWAccelBlit(GAL_Surface *src, GAL_Rect *srcrect, GAL_Surface *dst, GAL_Rect *dstrect)
@@ -18,9 +21,42 @@ int Sstar_DMA_HWAccelBlit(GAL_Surface *src, GAL_Rect *srcrect, GAL_Surface *dst,
 
 int Sstar_DMA_HWAccelFillRect(_THIS, GAL_Surface *dst, GAL_Rect *rect, Uint32 color)
 {
+    //clock_t start,end;
+    MI_S32 ret = 0;
+    MI_SYS_WindowRect_t rect;
+    MI_SYS_FrameData_t stSysFrame;
+    memcpy(&stSysFrame, 0, sizeof(MI_SYS_FrameData_t));
+    stSysFrame.phyAddr = ABS(dst->phy_addr);
+    if(dstRect) {
+        rect.u16X = dstRect->s32Xpos;
+        rect.u16Y = dstRect->s32Ypos;
+        rect.u16Height = dstRect->u32Height;
+        rect.u16Width = dstRect->u32Width;
+    } else {
+        rect.u16X = 0;
+        rect.u16Y = 0;
+        rect.u16Height = stSysFrame.u16Height;
+        rect.u16Width = stSysFrame.u16Width;
 
-    return TRUE;
+    }
+
+    DBG_INFO("rect %d %d %d %d \n", rect.u16X, rect.u16Y
+             , rect.u16Width, rect.u16Height);
+
+    //start = clock();
+    /*
+        if(src->phy_addr<0) {
+            MI_SYS_FlushInvCache(((vidmem_bucket *)src->hwdata)->base, ((vidmem_bucket *)src->hwdata)->size);
+        }
+    */
+
+    ret = mi_sys_BufFillPa(&stSysFrame, u32ColorVal, &rect);
+
+    //end = clock();
+    //printf("%s %d %f %d %d\n", __FUNCTION__, __LINE__, (float)(end - start) / CLOCKS_PER_SEC, stDstRect.u32Width, stDstRect.u32Height);
+    return TRUE ;
 }
+
 
 
 int Sstar_DMA_HWAccelColorKey(_THIS, GAL_Surface *src, Uint32 key)
@@ -61,8 +97,8 @@ int Sstar_DMA_HWAccelAlpha(_THIS, GAL_Surface *surface, Uint8 alpha)
 
     return 0;
 }
-void FB_SstarRotate(MI_PHY DrawPhyAddr,MI_PHY DrawPhyAddr1, MI_U16 u16SrcBufW, MI_U16 u16SrcBufH,
-    GAL_Surface *surface, MI_S32 s32Rotate, MI_S32 s32AlignStride)
+void FB_SstarRotate(MI_PHY DrawPhyAddr, MI_PHY DrawPhyAddr1, MI_U16 u16SrcBufW, MI_U16 u16SrcBufH,
+                    GAL_Surface *surface, MI_S32 s32Rotate, MI_S32 s32AlignStride)
 {
 }
 
