@@ -659,28 +659,31 @@ static GAL_Surface *SHADOW_SetVideoMode(_THIS, GAL_Surface *current,
     }
 
     shadowfbheader.pitch = ((shadowfbheader.width * shadowfbheader.depth) + 31) / 32*4;
-
     if (!(realfb_info->flags & FLAG_REALFB_PREALLOC))
     {
+#ifndef _MGGAL_SSTAR
         size = shadowfbheader.pitch * shadowfbheader.height;
+#else
+        size = 0;
+#endif
     }
-
+    
     if (shadowfbheader.depth <= 8)
         size += PALETTE_SIZE;
 
     size += sizeof (ShadowFBHeader);
     
+    _shadowfbheader = (ShadowFBHeader *) malloc (size);
     memcpy(_shadowfbheader, &shadowfbheader, sizeof(ShadowFBHeader));
 #ifdef _MGGAL_SSTAR
     shadow_canvas.w = width;
     shadow_canvas.h = height;
-    shadow_canvas.pitch = this->hidden->realfb_info->real_device->screen->pitch;
+    shadow_canvas.pitch = real_device->screen->pitch;
     SHADOW_AllocHWSurface(this,&shadow_canvas);
     _shadowfbheader->pixels =  shadow_canvas.pixels;
     _shadowfbheader->phy_addr =  shadow_canvas.phy_addr;
 #else
-    _shadowfbheader = (ShadowFBHeader *) malloc (size);
-    _shadowfbheader->pixels =NULL;
+    _shadowfbheader->pixels =(char *)_shadowfbheader + _shadowfbheader->fb_offset;
 #endif
 
     /* INIT  Share Memory  ShadowFBHeader */
@@ -720,11 +723,11 @@ static GAL_Surface *SHADOW_SetVideoMode(_THIS, GAL_Surface *current,
     current->w = _shadowfbheader->width;
     current->h = _shadowfbheader->height;
     current->pitch = _shadowfbheader->pitch;
-    current->pixels = (char *)_shadowfbheader + _shadowfbheader->fb_offset;
+    current->pixels = _shadowfbheader->pixels;
     current->phy_addr = _shadowfbheader->phy_addr;
-    #ifdef _MGGAL_SSTAR
+#ifdef _MGGAL_SSTAR
     FB_SstarAccel(this);
-    #endif
+#endif
     {
         pthread_attr_t new_attr;
 
