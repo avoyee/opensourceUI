@@ -17,4 +17,4 @@ sed -i "s/FB_ACCEL_SSTAR_.*/FB_ACCEL_SSTAR_${PLATFORM}, 1, [Define SSTAR GUI ACC
 autoheader
 autoconf
 
-./configure --disable-cursor  --enable-miniguientry --enable-videosstar="yes"  --disable-splash  --with-ft2-includes=${FT2_INCS} --host=${MINIGUI_CROSS_COMPILE} --prefix=${PREFIX} --exec-prefix=${EPREFIX} --enable-shared="yes" --enable-static="yes" --enable-videoshadow --disable-videomlshadow --enable-tslibial="yes" --enable-videodummy="no" --enable-videopcxvfb="no" --enable-videofbcon="no" --enable-detaildebug="no"
+./configure --disable-cursor --with-runmode=ths --enable-miniguientry --enable-videosstar="yes"  --disable-splash  --with-ft2-includes=${FT2_INCS} --host=${MINIGUI_CROSS_COMPILE} --prefix=${PREFIX} --exec-prefix=${EPREFIX} --enable-shared="yes" --enable-static="yes" --enable-videoshadow --disable-videomlshadow --enable-tslibial="yes" --enable-videodummy="no" --enable-videopcxvfb="no" --enable-videofbcon="no" --enable-detaildebug="no"
