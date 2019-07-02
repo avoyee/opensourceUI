@@ -361,8 +361,8 @@ static int RealEngine_GetInfo (RealFBInfo * realfb_info)
             __mg_shadow_fb_ops->refresh = refresh_vflip_msb_right;
         else
             __mg_shadow_fb_ops->refresh = refresh_normal_msb_right;
+        
     }
-
     refresh_init (pitch_size);
 
     return 0;
@@ -598,6 +598,8 @@ static void change_mouseXY_vflip(int* x, int* y)
 {
     *y = __gal_screen->h - *y;
 }
+
+
 
 #ifndef _MGRM_PROCESSES
 /*******************************************/
@@ -835,8 +837,11 @@ static GAL_Surface *SHADOW_SetVideoMode(_THIS, GAL_Surface *current,
         }
 
         shadowfbheader.pitch = ((shadowfbheader.width * shadowfbheader.depth) + 31) / 32*4;
-        shadowfbheader.phy_addr = realfb_info->phy_addr;
+#ifdef _MGGAL_SSTAR
+        size=0;
+#else
         size = shadowfbheader.pitch * shadowfbheader.height;
+#endif
         if(shadowfbheader.depth <= 8)
             size += PALETTE_SIZE;
         size += sizeof (ShadowFBHeader);
@@ -850,7 +855,6 @@ static GAL_Surface *SHADOW_SetVideoMode(_THIS, GAL_Surface *current,
 
         _shadowfbheader = (ShadowFBHeader *) shmat (shmid, 0, 0); 
         memcpy (_shadowfbheader, &shadowfbheader, sizeof (ShadowFBHeader));
-
         this->hidden->realfb_info = realfb_info;
         if ((realfb_info->real_device))
             this->hidden->realfb_info->fb = real_device->screen->pixels;
@@ -891,6 +895,17 @@ static GAL_Surface *SHADOW_SetVideoMode(_THIS, GAL_Surface *current,
                 "Couldn't allocate new pixel format for requested mode");
         return (NULL);
     }
+#ifdef _MGGAL_SSTAR
+    shadow_canvas.w = width;
+    shadow_canvas.h = height;
+    shadow_canvas.pitch = real_device->screen->pitch;
+    SHADOW_AllocHWSurface(this,&shadow_canvas);
+    _shadowfbheader->pixels =  shadow_canvas.pixels;
+    _shadowfbheader->phy_addr =  shadow_canvas.phy_addr;
+#else
+    _shadowfbheader->pixels = (char *)(_shadowfbheader) + _shadowfbheader->fb_offset;
+    _shadowfbheader->phy_addr = 0;
+#endif
 
     /* Set up the new mode framebuffer */
 
@@ -898,7 +913,7 @@ static GAL_Surface *SHADOW_SetVideoMode(_THIS, GAL_Surface *current,
     current->w = _shadowfbheader->width;
     current->h = _shadowfbheader->height;
     current->pitch = _shadowfbheader->pitch;
-    current->pixels = (char *)(_shadowfbheader) + _shadowfbheader->fb_offset;
+    current->pixels =_shadowfbheader->pixels;
     current->phy_addr = _shadowfbheader->phy_addr;
 #ifdef _MGGAL_SSTAR
     FB_SstarAccel(this);
@@ -955,6 +970,7 @@ static void SHADOW_VideoQuit (_THIS)
         if (semctl (this->hidden->semid, 0, IPC_RMID, ignored) < 0)
             perror ("NEWGAL>SHADOW: smmctl");
     }
+    
 }
 
 #endif
