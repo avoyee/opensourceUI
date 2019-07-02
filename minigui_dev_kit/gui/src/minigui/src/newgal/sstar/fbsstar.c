@@ -925,6 +925,8 @@ static GAL_Surface *FB_SetVideoMode(_THIS, GAL_Surface *current,
     if(rotation && mgIsServer)
 #else
     if(rotation)
+#endif
+
     {
         pthread_attr_t new_attr;
         pthread_attr_init(&new_attr);
@@ -943,7 +945,6 @@ static GAL_Surface *FB_SetVideoMode(_THIS, GAL_Surface *current,
         }
     }
 
-#endif
     fprintf(stderr, "%s %d %llx\n",__FUNCTION__,__LINE__,current->phy_addr);
     /* We're done */
     return (current);

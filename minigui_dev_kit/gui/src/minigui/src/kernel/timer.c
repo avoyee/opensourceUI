@@ -93,6 +93,7 @@ static void __mg_timer_action (void *data)
 {
 #ifdef _MGRM_PROCESSES
     SHAREDRES_TIMER_COUNTER += 1;
+    g_timer_started = 0;g_timer_started=g_timer_started;
 #else
 
 #if defined(__uClinux__) && defined(_MGRM_STANDALONE)
