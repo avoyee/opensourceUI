@@ -1289,6 +1289,7 @@ static int mouse_default_move(gvGridViewData* view, int x, int y)
     int row, col;
     int cursor_id = 0;
     RECT r;
+    cursor_id =cursor_id;
     get_cell_from_xy(view, x, y, &row, &col);
     get_cell_rect(view, row, col, &r);
     if ((row == 0) && (col == 0))
