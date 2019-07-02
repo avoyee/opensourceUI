@@ -675,16 +675,7 @@ static GAL_Surface *SHADOW_SetVideoMode(_THIS, GAL_Surface *current,
     
     _shadowfbheader = (ShadowFBHeader *) malloc (size);
     memcpy(_shadowfbheader, &shadowfbheader, sizeof(ShadowFBHeader));
-#ifdef _MGGAL_SSTAR
-    shadow_canvas.w = width;
-    shadow_canvas.h = height;
-    shadow_canvas.pitch = real_device->screen->pitch;
-    SHADOW_AllocHWSurface(this,&shadow_canvas);
-    _shadowfbheader->pixels =  shadow_canvas.pixels;
-    _shadowfbheader->phy_addr =  shadow_canvas.phy_addr;
-#else
-    _shadowfbheader->pixels =(char *)_shadowfbheader + _shadowfbheader->fb_offset;
-#endif
+
 
     /* INIT  Share Memory  ShadowFBHeader */
     this->hidden->realfb_info = realfb_info;
@@ -701,6 +692,16 @@ static GAL_Surface *SHADOW_SetVideoMode(_THIS, GAL_Surface *current,
         _shadowfbheader->fb_offset = _shadowfbheader->palette_offset+PALETTE_SIZE;
     else
         _shadowfbheader->fb_offset = _shadowfbheader->palette_offset;
+#ifdef _MGGAL_SSTAR
+        shadow_canvas.w = width;
+        shadow_canvas.h = height;
+        shadow_canvas.pitch = real_device->screen->pitch;
+        SHADOW_AllocHWSurface(this,&shadow_canvas);
+        _shadowfbheader->pixels =  shadow_canvas.pixels;
+        _shadowfbheader->phy_addr =  shadow_canvas.phy_addr;
+#else
+        _shadowfbheader->pixels =(char *)_shadowfbheader + _shadowfbheader->fb_offset;
+#endif
 
     if ((realfb_info->real_device))
         GAL_SetClipRect (real_device->screen, NULL); 
