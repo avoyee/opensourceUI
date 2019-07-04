@@ -82,7 +82,9 @@ extern "C"
         BOOL cdpath;
         char path[PATH_MAX + 1];
         char name[NAME_MAX + 1];
+#ifdef _MGRM_PROCESSES
         char layer[LEN_LAYER_NAME + 1];
+#endif
         char bmp_path[PATH_MAX + NAME_MAX + 1];
         mImagePiece *imagepiece;
         BITMAP bmp;
@@ -280,7 +282,11 @@ extern "C"
             sprintf(resolution[1], "%d", HEADER_LOGO_HEIGHT);
             sprintf(resolution[2], "%d", MAINWND_W);
             sprintf(resolution[3], "%d", MAINWND_H - HEADER_LOGO_HEIGHT);
-            exec_app(buff, item->name, resolution[0], resolution[1], resolution[2], resolution[3], "-layer", VARG_FENCE);
+            exec_app(buff, item->name, resolution[0], resolution[1], resolution[2], resolution[3], 
+#ifdef _MGRM_PROCESSES
+                "-layer", NAME_DEF_LAYER, 
+#endif
+                VARG_FENCE);
             break;
         }
         break;
@@ -342,12 +348,13 @@ extern "C"
                 goto error;
 
             if (GetValueFromEtcFile(APP_INFO_FILE, section, "name", item->name, NAME_MAX) != ETC_OK)
-                goto error;
+            goto error;
+#ifdef _MGRM_PROCESSES
 
-            if (GetValueFromEtcFile(APP_INFO_FILE, section, "layer", item->layer, LEN_LAYER_NAME) != ETC_OK)
-                goto error;
-
-            if (GetValueFromEtcFile(APP_INFO_FILE, section, "icon", item->bmp_path, PATH_MAX + NAME_MAX) != ETC_OK)
+        if(GetValueFromEtcFile(APP_INFO_FILE, section, "layer", item->layer, LEN_LAYER_NAME) != ETC_OK)
+            goto error;
+#endif
+        if(GetValueFromEtcFile(APP_INFO_FILE, section, "icon", item->bmp_path, PATH_MAX + NAME_MAX) != ETC_OK)
                 goto error;
 
             if (LoadBitmap(HDC_SCREEN, &item->bmp, item->bmp_path) != ERR_BMP_OK)
@@ -672,15 +679,14 @@ extern "C"
             GMAINWND_W = atoi(argv[1]);
             GMAINWND_H = atoi(argv[2]);
         }
+#ifdef _MGRM_PROCESSES
 
-        if (!ServerStartup(0, 0, 0))
-        {
+    if(!ServerStartup(0, 0, 0)) {
             fprintf(stderr,
                     "Can not start the server of MiniGUI-Processes: mginit.\n");
             return 1;
         }
 
-#ifdef _MGRM_PROCESSES
         JoinLayer(NAME_DEF_LAYER, "helloworld", 0, 0);
 #endif
 

@@ -2,7 +2,9 @@
 #define __SSTARDISP__H__
 
 #include <mi_disp_datatype.h>
-#include <mi_hdmi_datatype.h>
+#ifdef MI_HDMI
+#include "mi_hdmi_datatype.h"
+#include "mi_hdmi.h"
 typedef struct stTimingArray_s
 {
     char desc[50];
@@ -11,6 +13,6 @@ typedef struct stTimingArray_s
     MI_U16 u16Width;
     MI_U16 u16Height;
 }stTimingArray_t;
-
+#endif
 int sstar_disp_init(MI_DISP_PubAttr_t* pstDispPubAttr);
 #endif

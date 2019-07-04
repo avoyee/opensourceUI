@@ -21,6 +21,7 @@ int Sstar_DMA_HWAccelBlit(GAL_Surface *src, GAL_Rect *srcrect, GAL_Surface *dst,
 
 int Sstar_DMA_HWAccelFillRect(_THIS, GAL_Surface *dst, GAL_Rect *rect, Uint32 color)
 {
+#if 0
     //clock_t start,end;
     MI_S32 ret = 0;
     MI_SYS_WindowRect_t rect;
@@ -54,6 +55,7 @@ int Sstar_DMA_HWAccelFillRect(_THIS, GAL_Surface *dst, GAL_Rect *rect, Uint32 co
 
     //end = clock();
     //printf("%s %d %f %d %d\n", __FUNCTION__, __LINE__, (float)(end - start) / CLOCKS_PER_SEC, stDstRect.u32Width, stDstRect.u32Height);
+#endif
     return TRUE ;
 }
 

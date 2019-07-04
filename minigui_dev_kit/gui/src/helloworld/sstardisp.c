@@ -4,8 +4,7 @@
 
 #include "mi_sys.h"
 #include "sstardisp.h"
-#include "mi_hdmi_datatype.h"
-#include "mi_hdmi.h"
+
 #include "mi_panel_datatype.h"
 #include "mi_panel.h"
 #include "mi_disp_datatype.h"
@@ -17,6 +16,7 @@
 #if defined(__cplusplus)||defined(c_plusplus)
 extern "C"{
 #endif
+#ifdef MI_HDMI
 
 stTimingArray_t astTimingArray[] = {
     {
@@ -172,13 +172,14 @@ static stTimingArray_t *gettiming(MI_DISP_OutputTiming_e eOutputTiming)
     }
     return NULL;
 }
-
+#endif
 int sstar_disp_init(MI_DISP_PubAttr_t *pstDispPubAttr)
 {
     MI_PANEL_LinkType_e eLinkType;
     MI_DISP_InputPortAttr_t stInputPortAttr;
+#ifdef MI_HDMI
     stTimingArray_t *pstTiming = gettiming(pstDispPubAttr->eIntfSync);
-
+#endif
     MI_SYS_Init();
 
     memset(&stInputPortAttr, 0, sizeof(stInputPortAttr));
@@ -188,7 +189,7 @@ int sstar_disp_init(MI_DISP_PubAttr_t *pstDispPubAttr)
     stInputPortAttr.stDispWin.u16Y = 0;
     stInputPortAttr.stDispWin.u16Width = pstTiming->u16Width;
     stInputPortAttr.stDispWin.u16Height = pstTiming->u16Height;
-
+#ifdef MI_HDMI
     if (pstDispPubAttr->eIntfType == E_MI_DISP_INTF_HDMI)
     {
         MI_HDMI_InitParam_t stInitParam;
@@ -199,6 +200,9 @@ int sstar_disp_init(MI_DISP_PubAttr_t *pstDispPubAttr)
         MI_HDMI_Open(E_MI_HDMI_ID_0);
         Hdmi_Start(E_MI_HDMI_ID_0, pstTiming->eHdmiTiming);
     }
+#else
+    if(0){}
+#endif
     else if (pstDispPubAttr->eIntfType == E_MI_DISP_INTF_VGA)
     {
         eLinkType = E_MI_PNL_LINK_DAC_P;

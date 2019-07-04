@@ -119,7 +119,7 @@ typedef struct _mShapeTransRoundPiece mShapeTransRoundPiece;
     BOOL use_shadow; \
     TRANROUND_FILLMODE fill_mode; \
     TRANROUND_PAINTMODE paint_mode; \ 
-    void *paintBuffer
+    void *paintBuffer;
 
 struct _mShapeTransRoundPiece
 {

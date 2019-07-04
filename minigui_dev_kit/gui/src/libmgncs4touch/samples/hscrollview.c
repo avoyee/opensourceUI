@@ -35,7 +35,9 @@ typedef struct tagDspItem
     BOOL    cdpath;
     char    path [PATH_MAX + 1];
     char    name [NAME_MAX + 1];
+#ifdef _MGRM_PROCESSES
     char    layer [LEN_LAYER_NAME + 1];
+#endif
     char    bmp_path [PATH_MAX + NAME_MAX + 1];
     mImagePiece *imagepiece;
     BITMAP  bmp;
@@ -295,10 +297,10 @@ static BOOL naviBar_getItems(void)
 
         if(GetValueFromEtcFile(APP_INFO_FILE, section, "name", item->name, NAME_MAX) != ETC_OK)
             goto error;
-
+#ifdef _MGRM_PROCESSES
         if(GetValueFromEtcFile(APP_INFO_FILE, section, "layer", item->layer, LEN_LAYER_NAME) != ETC_OK)
             goto error;
-
+#endif
         if(GetValueFromEtcFile(APP_INFO_FILE, section, "icon", item->bmp_path, PATH_MAX + NAME_MAX) != ETC_OK)
             goto error;
 
