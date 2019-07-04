@@ -1,5 +1,5 @@
-prefix=/home/yongliang.li/i2/gui/libarary
-exec_prefix=/home/yongliang.li/i2/gui/libarary
+prefix=/home/yongliang.li/avoyee/opensourceUI/minigui_dev_kit/gui/library
+exec_prefix=/home/yongliang.li/avoyee/opensourceUI/minigui_dev_kit/gui/library
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include/libpng12
 

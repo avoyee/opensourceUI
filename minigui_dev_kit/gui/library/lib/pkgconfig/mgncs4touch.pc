@@ -1,5 +1,5 @@
-prefix=/home/yongliang.li/i2/gui/libarary
-exec_prefix=/home/yongliang.li/i2/gui/libarary
+prefix=/home/yongliang.li/avoyee/opensourceUI/minigui_dev_kit/gui/library
+exec_prefix=/home/yongliang.li/avoyee/opensourceUI/minigui_dev_kit/gui/library
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
 
@@ -7,6 +7,6 @@ Name: mGNCS4Touch
 Description: An extended new control set for smart device with a touch panel
 Version: 1.2.0
 Requires:
-Libs: -L${libdir} -lmgncs4touch  -L/home/yongliang.li/i2/gui/libarary/lib -L/home/yongliang.li/i2/project/gui/libarary/lib -lmgncs -lmgplus -lpthread -lstdc++ -lmgutils -lminigui_procs -ljpeg -lpng -lm -lts -lfreetype   -L/home/yongliang.li/i2/gui/libarary/lib -L/home/yongliang.li/i2/project/gui/libarary/lib -lmgeff -lmgplus -lpthread -lstdc++ -lminigui_procs -ljpeg -lpng -lm -lts -lfreetype   -L/home/yongliang.li/i2/gui/libarary/lib -lmgplus -lfreetype -lpthread -lstdc++   -L/home/yongliang.li/i2/gui/libarary/lib -lminigui_procs -ljpeg -lpng -lm -lts -lfreetype   -L/home/yongliang.li/i2/gui/libarary/lib -L/usr/local/lib -lz -lchipmunk
+Libs: -L${libdir} -lmgncs4touch  -L/home/yongliang.li/avoyee/opensourceUI/minigui_dev_kit/gui/library/lib -L/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/bin/../arm-linux-gnueabihf/libc/usr/local/lib -lmgncs -lmgplus -lz -lstdc++ -lmgutils -lminigui_ths -ljpeg -lpng -lm -lts -lfreetype -lpthread   -L/home/yongliang.li/avoyee/opensourceUI/minigui_dev_kit/gui/library/lib -L/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/bin/../arm-linux-gnueabihf/libc/usr/local/lib -lmgeff -lmgplus -lz -lstdc++ -lminigui_ths -ljpeg -lpng -lm -lts -lfreetype -lpthread   -L/home/yongliang.li/avoyee/opensourceUI/minigui_dev_kit/gui/library/lib -L/opt/ToolChain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/bin/../arm-linux-gnueabihf/libc/usr/local/lib -lmgplus -lfreetype -lz -lpthread -lstdc++   -L/home/yongliang.li/avoyee/opensourceUI/minigui_dev_kit/gui/library/lib -lminigui_ths -ljpeg -lpng -lm -lts -lfreetype -lpthread   -L/home/yongliang.li/avoyee/opensourceUI/minigui_dev_kit/gui/library/lib  -lz -lchipmunk
 Libs.private:
 Cflags: -I${includedir} 
