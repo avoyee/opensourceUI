@@ -269,7 +269,7 @@ void refresh_normal_msb_right (ShadowFBHeader * shadowfb_header, RealFBInfo *rea
     
     /* Copy the bits from Shadow FrameBuffer to console FrameBuffer */
     dst_bits = (gal_uint8*)realfb_info->fb;
-    src_bits = (gal_uint8*)shadowfb_header + shadowfb_header->fb_offset;
+    src_bits = shadowfb_header->pixels;//(gal_uint8*)shadowfb_header + shadowfb_header->fb_offset;
     src_bits += src_update.top * shadowfb_header->pitch + src_update.left * shadowfb_header->depth/8;
 
     if (realfb_info->depth == 1) {
@@ -372,7 +372,7 @@ void refresh_cw_msb_right (ShadowFBHeader *shadowfb_header, RealFBInfo *realfb_i
     _get_src_rect_cw (&dst_update, &src_update, realfb_info);
 
     /* Copy the bits from Shadow FrameBuffer to console FrameBuffer */
-    src_bits = (gal_uint8*)shadowfb_header + shadowfb_header->fb_offset;
+    src_bits = shadowfb_header->pixels;//(gal_uint8*)shadowfb_header + shadowfb_header->fb_offset;
     src_bits += (src_update.bottom -1) * shadowfb_header->pitch 
                 + src_update.left * (shadowfb_header->depth / 8);
 
@@ -473,7 +473,7 @@ void refresh_ccw_msb_right (ShadowFBHeader* shadowfb_header, RealFBInfo* realfb_
     _get_src_rect_ccw (&dst_update, &src_update, realfb_info);
 
     /* Copy the bits from Shadow FrameBuffer to console FrameBuffer */
-    src_bits = (gal_uint8*)shadowfb_header + shadowfb_header->fb_offset;
+    src_bits = shadowfb_header->pixels;//(gal_uint8*)shadowfb_header + shadowfb_header->fb_offset;
     src_bits += src_update.top * shadowfb_header->pitch 
                 + src_update.left * shadowfb_header->depth/8;
 
@@ -575,7 +575,7 @@ void refresh_hflip_msb_right (ShadowFBHeader* shadowfb_header, RealFBInfo* realf
     src_height = RECTH (src_update);
 
     /* Copy the bits from Shadow FrameBuffer to console FrameBuffer */
-    src_bits = (gal_uint8*)shadowfb_header + shadowfb_header->fb_offset;
+    src_bits = shadowfb_header->pixels;//(gal_uint8*)shadowfb_header + shadowfb_header->fb_offset;
     
     src_bits += src_update.top * shadowfb_header->pitch + (src_update.right - 1) 
                     * (shadowfb_header->depth / 8);
@@ -677,7 +677,7 @@ void refresh_vflip_msb_right (ShadowFBHeader* shadowfb_header, RealFBInfo* realf
     src_height = RECTH (src_update);
 
     /* Copy the bits from Shadow FrameBuffer to console FrameBuffer */
-    src_bits = (gal_uint8*)shadowfb_header + shadowfb_header->fb_offset;
+    src_bits = shadowfb_header->pixels;//(gal_uint8*)shadowfb_header + shadowfb_header->fb_offset;
 
     src_bits += (src_update.bottom - 1) * shadowfb_header->pitch + src_update.left 
                     * shadowfb_header->depth / 8;
