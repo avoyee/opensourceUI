@@ -2566,6 +2566,7 @@ src/gui/Makefile
 src/libc/Makefile
 src/misc/Makefile
 src/main/Makefile
+src/mpool/Makefile
 src/kernel/Makefile
 src/server/Makefile
 src/client/Makefile
