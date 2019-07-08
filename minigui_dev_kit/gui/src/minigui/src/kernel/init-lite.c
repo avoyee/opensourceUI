@@ -68,6 +68,9 @@
 #include "timer.h"
 #include "accelkey.h"
 #include "license.h"
+#ifdef _MGGAL_SSTAR
+#include <mpool.h>
+#endif
 
 /* Minimal graphics support by humingming 2010.7.8 */
 #ifdef _MG_MINIMALGDI
@@ -102,6 +105,9 @@ int InitGUI (int argc, const char* agr[])
 
 #ifndef __NOUNIX__
         tcgetattr (0, &savedtermio);
+#endif
+#ifdef _MGGAL_SSTAR
+        mpInit();
 #endif
 
     if (!mg_InitFixStr ()) {
@@ -158,6 +164,9 @@ void TerminateGUI (int rcByGUI)
 {
     mg_TerminateMisc ();
     mg_TerminateFixStr ();
+#ifdef _MGGAL_SSTAR
+    mpDeInit();
+#endif
 }
 
 #warning ExitGUISafely?
@@ -320,6 +329,9 @@ int InitGUI (int argc, const char* agr[])
     __mg_def_proc[0] = PreDefMainWinProc;
     __mg_def_proc[1] = PreDefDialogProc;
     __mg_def_proc[2] = PreDefControlProc;
+#ifdef _MGGAL_SSTAR
+        mpInit();
+#endif
 
     if (!mg_InitFixStr ()) {
         err_message (step, "Can not initialize Fixed String heap!\n");
@@ -512,6 +524,9 @@ void TerminateGUI (int rcByGUI)
 #endif
     mg_TerminateMisc ();
     mg_TerminateFixStr ();
+#ifdef _MGGAL_SSTAR
+        mpDeInit();
+#endif
 
 #ifdef _MGRM_PROCESSES
     if (mgIsServer) 

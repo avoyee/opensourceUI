@@ -348,7 +348,9 @@ static BOOL InstallSEGVHandler (void)
 #ifdef HAVE_LOCALE_H
 #include <locale.h>
 #endif
-
+#ifdef _MGGAL_SSTAR
+#include <mpool.h>
+#endif
 int GUIAPI InitGUI (int args, const char *agr[])
 {
     int step = 0;
@@ -375,7 +377,9 @@ int GUIAPI InitGUI (int args, const char *agr[])
     __mg_def_proc[0] = PreDefMainWinProc;
     __mg_def_proc[1] = PreDefDialogProc;
     __mg_def_proc[2] = PreDefControlProc;
-
+#ifdef _MGGAL_SSTAR
+    mpInit();
+#endif
     step++;
     if (!mg_InitFixStr ()) {
         fprintf (stderr, "KERNEL>InitGUI: Init Fixed String module failure!\n");
@@ -585,7 +589,9 @@ void GUIAPI TerminateGUI (int not_used)
     extern void mg_miFreeArcCache (void);
     mg_miFreeArcCache ();
 #endif
-
+#ifdef _MGGAL_SSTAR
+    mpDeInit();
+#endif
     /* 
      * Restore original termio
      *tcsetattr (0, TCSAFLUSH, &savedtermio);
