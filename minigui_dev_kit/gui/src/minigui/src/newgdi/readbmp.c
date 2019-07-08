@@ -55,11 +55,9 @@
 #include "misc.h"
 #include "readbmp.h"
 #include "bitmap.h"
-
-#include "mi_common.h"
-#include "mi_sys_datatype.h"
-#include "mi_sys.h"
-
+#ifdef _MGGAL_SSTAR
+#include "mpool.h"
+#endif
 inline static BOOL device_has_alpha(HDC hdc);
 
 /* Init a bitmap as a normal bitmap */
@@ -81,26 +79,15 @@ BOOL GUIAPI InitBitmap(HDC hdc, Uint32 w, Uint32 h, Uint32 pitch, BYTE *bits,
         bmp->bmPitch = pitch;
         bmp->bmPhyAddr = 0;
     } else if(!bits) {
-        MI_PHY phy_addr;
-        void *virt_addr;
-
         size_t size = GAL_GetBoxSize(pdc->surface, w, h, &bmp->bmPitch);
 
-        /*
+#ifdef _MGGAL_SSTAR
+        if(mpMalloc(size,&bmp->bmPhyAddr,(void**)&bmp->bmBits)<0)
+            return FALSE;
+#else
         if(!(bmp->bmBits = malloc(size)))
-                    return FALSE;
-        */
-        if(MI_SUCCESS != MI_SYS_MMA_Alloc((MI_U8*)"#gui-readbmp", size, &phy_addr)) {
-            printf("readbmp[%s][%d]: MMA ALLOC %d fail\n", __FUNCTION__, __LINE__, size);
             return FALSE;
-        }
-
-        if(MI_SUCCESS != MI_SYS_Mmap(phy_addr, size, &virt_addr, FALSE)) {
-            printf("readbmp[%s][%d]: MMA MMAP %d fail\n", __FUNCTION__, __LINE__, size);
-            return FALSE;
-        }
-        bmp->bmPhyAddr = phy_addr;
-        bmp->bmBits = virt_addr;
+#endif
     } else /* bits is not zero, but pitch is zero */
         return FALSE;
 
@@ -227,8 +214,6 @@ static int init_bitmap_from_mybmp(HDC hdc, PBITMAP bmp,
     unsigned int size;
     Uint32 alpha_pitch;
     PDC pdc;
-    MI_PHY phy_addr;
-    void *virt_addr;
     pdc = dc_HDC2PDC(hdc);
 
     bmp->bmBitsPerPixel = pdc->surface->format->BitsPerPixel;
@@ -237,31 +222,21 @@ static int init_bitmap_from_mybmp(HDC hdc, PBITMAP bmp,
     bmp->bmAlphaPitch = 0;
 
     size = GAL_GetBoxSize(pdc->surface, my_bmp->w, my_bmp->h, &bmp->bmPitch);
-    /*
-        if (!(bmp->bmBits = malloc (alloc_all?size:bmp->bmPitch))) {
-            ret = ERR_BMP_MEM;
-            goto cleanup_and_ret;
-        }
-    */
+
     size = alloc_all ? size : bmp->bmPitch;
 
-    if(MI_SUCCESS != MI_SYS_MMA_Alloc((MI_U8*)"#gui_readbmp1", size, &phy_addr)) {
-        printf("readbmp[%s][%d]: MMA ALLOC %d fail\n", __FUNCTION__, __LINE__, size);
-        return -1;
-    }
-
-    if(MI_SUCCESS != MI_SYS_Mmap(phy_addr, size, &virt_addr, FALSE)) {
-        printf("readbmp[%s][%d]: MMA MMAP %d fail\n", __FUNCTION__, __LINE__, size);
-        return -1;
-    }
-
-    if(!virt_addr) {
+#ifdef _MGGAL_SSTAR
+    if(mpMalloc(size,&bmp->bmPhyAddr,(void**)&bmp->bmBits)<0)
+    {
         ret = ERR_BMP_MEM;
         goto cleanup_and_ret;
     }
-
-    bmp->bmBits = virt_addr;
-    bmp->bmPhyAddr = phy_addr;
+#else
+    if (!(bmp->bmBits = malloc (size))) {
+        ret = ERR_BMP_MEM;
+        goto cleanup_and_ret;
+    }
+#endif
     bmp->bmWidth = my_bmp->w;
     bmp->bmHeight = my_bmp->h;
     bmp->bmAllocAll = alloc_all;
@@ -331,14 +306,11 @@ cleanup_and_ret:
         DeleteBitmapAlphaPixel(bmp);
 
         if(bmp->bmBits != NULL) {
-
-            if(bmp->bmPhyAddr) {
-                MI_SYS_Munmap(bmp->bmBits, bmp->bmAllocAll ? bmp->bmPitch * bmp->bmHeight : bmp->bmPitch);
-                MI_SYS_MMA_Free(bmp->bmPhyAddr);bmp->bmPhyAddr = 0;
-            } else {
-                free(bmp->bmBits);
-            }
-
+#ifdef _MGGAL_SSTAR
+            mpFree(bmp->bmBits);
+#else
+            free(bmp->bmBits);
+#endif
             bmp->bmBits = NULL;
         }
 
@@ -487,13 +459,11 @@ int GUIAPI ExpandMyBitmap(HDC hdc, PBITMAP bmp, const MYBITMAP *my_bmp,
         DeleteBitmapAlphaPixel(bmp);
 
         if(bmp->bmBits != NULL) {
-            if(bmp->bmPhyAddr) {
-                MI_SYS_Munmap(bmp->bmBits, bmp->bmAllocAll ? bmp->bmPitch * bmp->bmHeight : bmp->bmPitch);
-                MI_SYS_MMA_Free(bmp->bmPhyAddr);bmp->bmPhyAddr = 0;
-            } else {
-                free(bmp->bmBits);
-            }
-
+#ifdef _MGGAL_SSTAR
+            mpFree(bmp->bmBits);
+#else
+            free(bmp->bmBits);
+#endif
             bmp->bmBits = NULL;
         }
 
@@ -651,16 +621,13 @@ void GUIAPI UnloadBitmap(PBITMAP bmp)
 
 
     if(bmp->bmBits != NULL) {
-
-        if(bmp->bmPhyAddr) {
-            MI_SYS_Munmap(bmp->bmBits, bmp->bmAllocAll ? bmp->bmPitch * bmp->bmHeight : bmp->bmPitch);
-            MI_SYS_MMA_Free(bmp->bmPhyAddr);
-            bmp->bmPhyAddr = 0;
-        } else {
-            free(bmp->bmBits);
-        }
-
+#ifdef _MGGAL_SSTAR
+        mpFree(bmp->bmBits);
+#else
+        free(bmp->bmBits);
+#endif
         bmp->bmBits = NULL;
+
     }
 }
 

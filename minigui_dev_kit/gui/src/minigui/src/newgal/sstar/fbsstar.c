@@ -69,8 +69,7 @@
 #include "fbsstaraccel.h"
 
 
-//#include "fbsstar.h"
-
+#include "mpool.h"
 //#define SSTAR_DEBUG
 
 #define GFX_ROT_ALIGN_X 128
@@ -918,7 +917,6 @@ static GAL_Surface *FB_SetVideoMode(_THIS, GAL_Surface *current,
     default:
         break;
     }
-    MI_SYS_Init();
 
 #ifdef _MGRM_PROCESSES
 
@@ -1270,21 +1268,10 @@ static int FB_AllocHWSurface(_THIS, GAL_Surface *surface)
             GAL_OutOfMemory();
             return -1;
         }
-
-        if (MI_SUCCESS != MI_SYS_MMA_Alloc((MI_U8*)"#gui-surface", size, &phyAddr))
+        if(mpMalloc(size,&phyAddr,(void**)&virt_addr)<0)
         {
-            GAL_SetError("NEWGAL>FBCON[%s][%d]: MMA ALLOC %d fail\n", __FUNCTION__, __LINE__, size);
             return -1;
         }
-
-        if (MI_SUCCESS != MI_SYS_Mmap(phyAddr, size, &virt_addr, FALSE))
-        {
-            GAL_SetError("NEWGAL>FBCON[%s][%d]: MMA MMAP %d fail\n", __FUNCTION__, __LINE__, size);
-            return -1;
-        }
-
-        GAL_SetError("NEWGAL>FBCON[%s][%d]:alloc MMA %llx\n", __FUNCTION__, __LINE__, phyAddr);
-
         newbucket->bFromMMA = TRUE;
         newbucket->phy_addr = phyAddr;
         newbucket->virt_addr = virt_addr;
@@ -1327,9 +1314,8 @@ static void FB_FreeHWSurface(_THIS, GAL_Surface *surface)
     {
         if (surface->phy_addr < 0)
         {
-            GAL_SetError("NEWGAL>FBCON[%s][%d]:free MMA %llx\n", __FUNCTION__, __LINE__, bucket->phy_addr);
-            MI_SYS_Munmap(bucket->virt_addr, bucket->size);
-            MI_SYS_MMA_Free(bucket->phy_addr);
+            //GAL_SetError("NEWGAL>FBCON[%s][%d]:free MMA %llx\n", __FUNCTION__, __LINE__, bucket->phy_addr);
+            mpFree(bucket->virt_addr);
             free(bucket);
         }
         else
@@ -1348,9 +1334,8 @@ static void FB_FreeHWSurface(_THIS, GAL_Surface *surface)
         if (surface->phy_addr < 0)
         {
 
-            GAL_SetError("NEWGAL>FBCON[%s][%d]:free MMA %llx\n", __FUNCTION__, __LINE__, bucket->phy_addr);
-            MI_SYS_Munmap(bucket->virt_addr, bucket->size);
-            MI_SYS_MMA_Free(bucket->phy_addr);
+            //GAL_SetError("NEWGAL>FBCON[%s][%d]:free MMA %llx\n", __FUNCTION__, __LINE__, bucket->phy_addr);
+            mpFree(bucket->virt_addr);
             free(bucket);
         }
         else
@@ -1370,9 +1355,8 @@ static void FB_FreeHWSurface(_THIS, GAL_Surface *surface)
 #else
     if (surface->phy_addr < 0)
     {
-        GAL_SetError("NEWGAL>FBCON[%s][%d]:free MMA %llx\n", __FUNCTION__, __LINE__, bucket->phy_addr);
-        MI_SYS_Munmap(bucket->virt_addr, bucket->size);
-        MI_SYS_MMA_Free(bucket->phy_addr);
+        //GAL_SetError("NEWGAL>FBCON[%s][%d]:free MMA %llx\n", __FUNCTION__, __LINE__, bucket->phy_addr);
+        mpFree(bucket->virt_addr);
         free(bucket);
     }
     else

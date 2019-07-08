@@ -4,9 +4,10 @@ COMMON_SUBDIRS = misc kernel sysres include
 COMMON_LADD =               	\
     kernel/libkernel.la     	\
 	sysres/libsysres.la         \
-    misc/libmisc.la         	
+    misc/libmisc.la         	\
+    mpool/libmpool.la
 else
-COMMON_SUBDIRS = libc misc main kernel sysres ial control ex_ctrl font gui mybmp include textedit
+COMMON_SUBDIRS = libc misc main mpool kernel sysres ial control ex_ctrl font gui mybmp include textedit
 
 COMMON_LADD =               	\
     libc/liblibc.la         	\
@@ -18,6 +19,7 @@ COMMON_LADD =               	\
     ial/libial.la           	\
     gui/libgui.la           	\
     main/libmain.la         	\
+    mpool/libmpool.la       	\
     mybmp/libmybmp.la       	\
     kernel/libkernel.la     	\
     sysres/libsysres.la         \

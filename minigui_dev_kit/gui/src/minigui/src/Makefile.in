@@ -374,7 +374,7 @@ target_vendor = @target_vendor@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-@MG_MINIMALGDI_FALSE@COMMON_SUBDIRS = libc misc main kernel sysres ial control ex_ctrl font gui mybmp include textedit
+@MG_MINIMALGDI_FALSE@COMMON_SUBDIRS = libc misc main mpool kernel sysres ial control ex_ctrl font gui mybmp include textedit
 @MG_MINIMALGDI_TRUE@COMMON_SUBDIRS = misc kernel sysres include 
 @MG_MINIMALGDI_FALSE@COMMON_LADD = \
 @MG_MINIMALGDI_FALSE@    libc/liblibc.la         	\
@@ -386,6 +386,7 @@ top_srcdir = @top_srcdir@
 @MG_MINIMALGDI_FALSE@    ial/libial.la           	\
 @MG_MINIMALGDI_FALSE@    gui/libgui.la           	\
 @MG_MINIMALGDI_FALSE@    main/libmain.la         	\
+@MG_MINIMALGDI_FALSE@    mpool/libmpool.la       	\
 @MG_MINIMALGDI_FALSE@    mybmp/libmybmp.la       	\
 @MG_MINIMALGDI_FALSE@    kernel/libkernel.la     	\
 @MG_MINIMALGDI_FALSE@    sysres/libsysres.la         \
@@ -394,7 +395,8 @@ top_srcdir = @top_srcdir@
 @MG_MINIMALGDI_TRUE@COMMON_LADD = \
 @MG_MINIMALGDI_TRUE@    kernel/libkernel.la     	\
 @MG_MINIMALGDI_TRUE@	sysres/libsysres.la         \
-@MG_MINIMALGDI_TRUE@    misc/libmisc.la         	
+@MG_MINIMALGDI_TRUE@    misc/libmisc.la         	\
+@MG_MINIMALGDI_TRUE@    mpool/libmpool.la
 
 @MGRM_PROCESSES_FALSE@@MGRM_STANDALONE_FALSE@LITE_LADD = 
 @MGRM_PROCESSES_TRUE@@MGRM_STANDALONE_FALSE@LITE_LADD = server/libserver.la client/libclient.la
