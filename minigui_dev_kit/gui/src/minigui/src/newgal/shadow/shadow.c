@@ -762,12 +762,17 @@ static void SHADOW_VideoQuit (_THIS)
         if (end_flag != 0) {
             break;
         }
+        usleep(1000);
     }
 
     if (_shadowfbheader) {
         _shadowfbheader->dirty = FALSE;
         free(_shadowfbheader);
         _shadowfbheader = NULL;
+#ifdef _MGGAL_SSTAR
+        SHADOW_FreeHWSurface(this,&shadow_canvas);
+        this->screen->pixels = NULL;
+#endif
     }
 
     if (this->hidden->realfb_info) {
@@ -1000,8 +1005,11 @@ static int SHADOW_AllocHWSurface (_THIS, GAL_Surface *surface)
 static void SHADOW_FreeHWSurface (_THIS, GAL_Surface *surface)
 {
     GAL_VideoDevice *real_device;
+    if(this->hidden->realfb_info !=NULL)
+    {
     real_device = this->hidden->realfb_info->real_device;
     return real_device->FreeHWSurface(this,surface);
+    }
 }
 
 static int SHADOW_SetColors (_THIS, int firstcolor, int ncolors, 
