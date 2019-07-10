@@ -1315,7 +1315,7 @@ static void FB_FreeHWSurface(_THIS, GAL_Surface *surface)
         if (surface->phy_addr < 0)
         {
             //GAL_SetError("NEWGAL>FBCON[%s][%d]:free MMA %llx\n", __FUNCTION__, __LINE__, bucket->phy_addr);
-            mpFree(bucket->virt_addr);
+            mpFree(bucket->size,bucket->phy_addr,bucket->virt_addr);
             free(bucket);
         }
         else
@@ -1335,7 +1335,7 @@ static void FB_FreeHWSurface(_THIS, GAL_Surface *surface)
         {
 
             //GAL_SetError("NEWGAL>FBCON[%s][%d]:free MMA %llx\n", __FUNCTION__, __LINE__, bucket->phy_addr);
-            mpFree(bucket->virt_addr);
+            mpFree(bucket->size,bucket->phy_addr,bucket->virt_addr);
             free(bucket);
         }
         else
@@ -1356,7 +1356,7 @@ static void FB_FreeHWSurface(_THIS, GAL_Surface *surface)
     if (surface->phy_addr < 0)
     {
         //GAL_SetError("NEWGAL>FBCON[%s][%d]:free MMA %llx\n", __FUNCTION__, __LINE__, bucket->phy_addr);
-        mpFree(bucket->virt_addr);
+        mpFree(bucket->size,bucket->phy_addr,bucket->virt_addr);
         free(bucket);
     }
     else

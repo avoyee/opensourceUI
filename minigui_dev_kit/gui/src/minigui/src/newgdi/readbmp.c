@@ -307,7 +307,7 @@ cleanup_and_ret:
 
         if(bmp->bmBits != NULL) {
 #ifdef _MGGAL_SSTAR
-            mpFree(bmp->bmBits);
+            mpFree(bmp->bmPitch*bmp->bmHeight,bmp->bmPhyAddr,bmp->bmBits);
 #else
             free(bmp->bmBits);
 #endif
@@ -460,7 +460,7 @@ int GUIAPI ExpandMyBitmap(HDC hdc, PBITMAP bmp, const MYBITMAP *my_bmp,
 
         if(bmp->bmBits != NULL) {
 #ifdef _MGGAL_SSTAR
-            mpFree(bmp->bmBits);
+            mpFree(bmp->bmPitch*bmp->bmHeight,bmp->bmPhyAddr,bmp->bmBits);
 #else
             free(bmp->bmBits);
 #endif
@@ -622,7 +622,7 @@ void GUIAPI UnloadBitmap(PBITMAP bmp)
 
     if(bmp->bmBits != NULL) {
 #ifdef _MGGAL_SSTAR
-        mpFree(bmp->bmBits);
+        mpFree(bmp->bmPitch*bmp->bmHeight,bmp->bmPhyAddr,bmp->bmBits);
 #else
         free(bmp->bmBits);
 #endif
