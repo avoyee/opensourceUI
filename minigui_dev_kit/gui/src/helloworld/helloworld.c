@@ -24,6 +24,9 @@ static int HelloWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
         return DefaultMainWinProc (hWnd, message, wParam, lParam);
 }
 
+#endif
+#include "sstardisp.h"
+MI_DISP_PubAttr_t stDispPubAttr;
 int MiniGUIMain (int argc, const char* argv[])
 {
         MSG Msg;
@@ -62,7 +65,8 @@ int MiniGUIMain (int argc, const char* argv[])
         }
 
         MainWindowThreadCleanup (hMainWnd);
-
+    sstar_disp_Deinit(&stDispPubAttr);
+    exit(0);
         return 0;
 }
 
@@ -70,6 +74,9 @@ int MiniGUIMain (int argc, const char* argv[])
 #ifdef _USE_MINIGUIENTRY
 int main(int argc, const char* argv[])
 {
+    stDispPubAttr.eIntfType = E_MI_DISP_INTF_LCD;
+    stDispPubAttr.eIntfSync = E_MI_DISP_OUTPUT_USER;
+    sstar_disp_init(&stDispPubAttr);
     main_entry(argc, argv);
     return 0;
 

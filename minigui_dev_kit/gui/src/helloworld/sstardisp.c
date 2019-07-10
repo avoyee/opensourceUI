@@ -254,6 +254,33 @@ int sstar_disp_init(MI_DISP_PubAttr_t *pstDispPubAttr)
     }
     return 0;
 }
+int sstar_disp_Deinit(MI_DISP_PubAttr_t *pstDispPubAttr)
+{
+
+    MI_DISP_DisableInputPort(0, 0);
+    MI_DISP_DisableVideoLayer(0);
+    MI_DISP_UnBindVideoLayer(0, 0);
+    MI_DISP_Disable(0);
+
+    switch(pstDispPubAttr->eIntfType) {
+        case E_MI_DISP_INTF_HDMI:
+
+            MI_HDMI_Close(E_MI_HDMI_ID_0);
+            MI_HDMI_DeInit();
+            break;
+
+        case E_MI_DISP_INTF_VGA:
+            break;
+
+        case E_MI_DISP_INTF_LCD:
+        default:
+            MI_PANEL_DeInit();
+
+    }
+
+    MI_SYS_Exit();
+}
+
 #if defined(__cplusplus)||defined(c_plusplus)
 }
 #endif

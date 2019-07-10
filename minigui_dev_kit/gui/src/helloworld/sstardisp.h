@@ -15,4 +15,5 @@ typedef struct stTimingArray_s
 }stTimingArray_t;
 #endif
 int sstar_disp_init(MI_DISP_PubAttr_t* pstDispPubAttr);
+int sstar_disp_Deinit(MI_DISP_PubAttr_t *pstDispPubAttr);
 #endif
