@@ -10,7 +10,7 @@ LOCAL_LIBS=-L${EPREFIX}/lib
 SDK_INCS=-I${SDKINCS}
 UAPI_INCS=-I${UAPIINCS}
 FT2_INCS=${LOCAL_INCS}/freetype2
-declare -x CFLAGS="-Wno-unused-value -Wno-misleading-indentation -rdynamic -funwind-tables "-I${LOCAL_INCS}" "${SDK_INCS}" "${UAPI_INCS}
+declare -x CFLAGS="-Wno-unused-but-set-variable -Wno-unused-function -Wno-unused-value -Wno-misleading-indentation -rdynamic -funwind-tables "-I${LOCAL_INCS}" "${SDK_INCS}" "${UAPI_INCS}
 declare -x LDFLAGS=${LOCAL_LIBS}
 
 sed -i "s/FB_ACCEL_SSTAR_.*/FB_ACCEL_SSTAR_${PLATFORM}, 1, [Define SSTAR GUI ACCELERATOR])/g" configure.ac

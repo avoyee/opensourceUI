@@ -26,6 +26,7 @@ static int HelloWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
 
 #endif
 #include "sstardisp.h"
+#include <signal.h>
 MI_DISP_PubAttr_t stDispPubAttr;
 int MiniGUIMain (int argc, const char* argv[])
 {
@@ -34,6 +35,11 @@ int MiniGUIMain (int argc, const char* argv[])
         MAINWINCREATE CreateInfo;
 
         #ifdef _MGRM_PROCESSES
+    if(!ServerStartup(0, 0, 0)) {
+        fprintf(stderr,
+                "Can not start the server of MiniGUI-Processes: mginit.\n");
+        return 1;
+    }
         JoinLayer (NAME_DEF_LAYER , "helloworld" , 0 , 0);
         #endif
 
@@ -66,7 +72,6 @@ int MiniGUIMain (int argc, const char* argv[])
 
         MainWindowThreadCleanup (hMainWnd);
     sstar_disp_Deinit(&stDispPubAttr);
-    exit(0);
         return 0;
 }
 
@@ -78,6 +83,7 @@ int main(int argc, const char* argv[])
     stDispPubAttr.eIntfSync = E_MI_DISP_OUTPUT_USER;
     sstar_disp_init(&stDispPubAttr);
     main_entry(argc, argv);
+    raise(SIGINT);
     return 0;
 
 }

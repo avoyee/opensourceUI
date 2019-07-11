@@ -24,119 +24,160 @@ stTimingArray_t astTimingArray[] = {
         .eOutputTiming = E_MI_DISP_OUTPUT_USER,
         .eHdmiTiming = E_MI_HDMI_TIMING_MAX,
     },
-    {.desc = "480p60",
-     .eOutputTiming = E_MI_DISP_OUTPUT_480P60,
-     .eHdmiTiming = E_MI_HDMI_TIMING_480_60P,
-     .u16Width = 640,
-     .u16Height = 480},
-    {.desc = "576p50",
-     .eOutputTiming = E_MI_DISP_OUTPUT_576P50,
-     .eHdmiTiming = E_MI_HDMI_TIMING_576_50P,
-     .u16Width = 720,
-     .u16Height = 576},
-    {.desc = "720p50",
-     .eOutputTiming = E_MI_DISP_OUTPUT_720P50,
-     .eHdmiTiming = E_MI_HDMI_TIMING_720_50P,
-     .u16Width = 1280,
-     .u16Height = 720},
-    {.desc = "720p60",
-     .eOutputTiming = E_MI_DISP_OUTPUT_720P60,
-     .eHdmiTiming = E_MI_HDMI_TIMING_720_60P,
-     .u16Width = 1280,
-     .u16Height = 720},
-    {.desc = "1024x768_60",
-     .eOutputTiming = E_MI_DISP_OUTPUT_1024x768_60,
-     .eHdmiTiming = E_MI_HDMI_TIMING_1024x768_60P,
-     .u16Width = 1024,
-     .u16Height = 768},
-    {.desc = "1080p24",
-     .eOutputTiming = E_MI_DISP_OUTPUT_1080P24,
-     .eHdmiTiming = E_MI_HDMI_TIMING_1080_24P,
-     .u16Width = 1920,
-     .u16Height = 1080},
-    {.desc = "1080p25",
-     .eOutputTiming = E_MI_DISP_OUTPUT_1080P25,
-     .eHdmiTiming = E_MI_HDMI_TIMING_1080_25P,
-     .u16Width = 1920,
-     .u16Height = 1080},
-    {.desc = "1080p30",
-     .eOutputTiming = E_MI_DISP_OUTPUT_1080P30,
-     .eHdmiTiming = E_MI_HDMI_TIMING_1080_30P,
-     .u16Width = 1920,
-     .u16Height = 1080},
-    {.desc = "1080p50",
-     .eOutputTiming = E_MI_DISP_OUTPUT_1080P50,
-     .eHdmiTiming = E_MI_HDMI_TIMING_1080_50P,
-     .u16Width = 1920,
-     .u16Height = 1080},
-    {.desc = "1080p60",
-     .eOutputTiming = E_MI_DISP_OUTPUT_1080P60,
-     .eHdmiTiming = E_MI_HDMI_TIMING_1080_60P,
-     .u16Width = 1920,
-     .u16Height = 1080},
-    {.desc = "1280x800_60",
-     .eOutputTiming = E_MI_DISP_OUTPUT_1280x800_60,
-     .eHdmiTiming = E_MI_HDMI_TIMING_1280x800_60P,
-     .u16Width = 1280,
-     .u16Height = 800},
-    {.desc = "1280x1024_60",
-     .eOutputTiming = E_MI_DISP_OUTPUT_1280x1024_60,
-     .eHdmiTiming = E_MI_HDMI_TIMING_1280x1024_60P,
-     .u16Width = 1280,
-     .u16Height = 1024},
-    {.desc = "1366x768_60",
-     .eOutputTiming = E_MI_DISP_OUTPUT_1366x768_60,
-     .eHdmiTiming = E_MI_HDMI_TIMING_1366x768_60P, //HDMI don't support this timing
-     .u16Width = 1366,
-     .u16Height = 768},
-    {.desc = "1440x900_60",
-     .eOutputTiming = E_MI_DISP_OUTPUT_1440x900_60,
-     .eHdmiTiming = E_MI_HDMI_TIMING_1440x900_60P,
-     .u16Width = 1440,
-     .u16Height = 900},
-    {.desc = "1680x1050_60",
-     .eOutputTiming = E_MI_DISP_OUTPUT_1680x1050_60,
-     .eHdmiTiming = E_MI_HDMI_TIMING_1680x1050_60P, //HDMI don't support this timing
-     .u16Width = 1680,
-     .u16Height = 1050},
-    {.desc = "1600x1200_60",
-     .eOutputTiming = E_MI_DISP_OUTPUT_1600x1200_60,
-     .eHdmiTiming = E_MI_HDMI_TIMING_1600x1200_60P,
-     .u16Width = 1600,
-     .u16Height = 1200},
-    {.desc = "2560x1440_30",
-     .eOutputTiming = E_MI_DISP_OUTPUT_2560x1440_30,
-     .eHdmiTiming = E_MI_HDMI_TIMING_MAX, //HDMI don't support this timing
-     .u16Width = 2560,
-     .u16Height = 1440},
-    {.desc = "2560x1440_60",
-     .eOutputTiming = E_MI_DISP_OUTPUT_MAX, //not defined
-     .eHdmiTiming = E_MI_HDMI_TIMING_MAX,   //HDMI don't support this timing
-     .u16Width = 2560,
-     .u16Height = 1440},
-    {.desc = "2560x1600_60",
-     .eOutputTiming = E_MI_DISP_OUTPUT_2560x1600_60,
-     .eHdmiTiming = E_MI_HDMI_TIMING_MAX, //HDMI don't support this timing
-     .u16Width = 2560,
-     .u16Height = 1600},
-    {.desc = "3840x2160_30",
-     .eOutputTiming = E_MI_DISP_OUTPUT_3840x2160_30,
-     .eHdmiTiming = E_MI_HDMI_TIMING_4K2K_30P,
-     .u16Width = 3840,
-     .u16Height = 2160},
-    {.desc = "3840x2160_60",
-     .eOutputTiming = E_MI_DISP_OUTPUT_3840x2160_60,
-     .eHdmiTiming = E_MI_HDMI_TIMING_4K2K_60P,
-     .u16Width = 3840,
-     .u16Height = 2160},
+    {
+        .desc = "480p60",
+        .eOutputTiming = E_MI_DISP_OUTPUT_480P60,
+        .eHdmiTiming = E_MI_HDMI_TIMING_480_60P,
+        .u16Width = 640,
+        .u16Height = 480
+    },
+    {
+        .desc = "576p50",
+        .eOutputTiming = E_MI_DISP_OUTPUT_576P50,
+        .eHdmiTiming = E_MI_HDMI_TIMING_576_50P,
+        .u16Width = 720,
+        .u16Height = 576
+    },
+    {
+        .desc = "720p50",
+        .eOutputTiming = E_MI_DISP_OUTPUT_720P50,
+        .eHdmiTiming = E_MI_HDMI_TIMING_720_50P,
+        .u16Width = 1280,
+        .u16Height = 720
+    },
+    {
+        .desc = "720p60",
+        .eOutputTiming = E_MI_DISP_OUTPUT_720P60,
+        .eHdmiTiming = E_MI_HDMI_TIMING_720_60P,
+        .u16Width = 1280,
+        .u16Height = 720
+    },
+    {
+        .desc = "1024x768_60",
+        .eOutputTiming = E_MI_DISP_OUTPUT_1024x768_60,
+        .eHdmiTiming = E_MI_HDMI_TIMING_1024x768_60P,
+        .u16Width = 1024,
+        .u16Height = 768
+    },
+    {
+        .desc = "1080p24",
+        .eOutputTiming = E_MI_DISP_OUTPUT_1080P24,
+        .eHdmiTiming = E_MI_HDMI_TIMING_1080_24P,
+        .u16Width = 1920,
+        .u16Height = 1080
+    },
+    {
+        .desc = "1080p25",
+        .eOutputTiming = E_MI_DISP_OUTPUT_1080P25,
+        .eHdmiTiming = E_MI_HDMI_TIMING_1080_25P,
+        .u16Width = 1920,
+        .u16Height = 1080
+    },
+    {
+        .desc = "1080p30",
+        .eOutputTiming = E_MI_DISP_OUTPUT_1080P30,
+        .eHdmiTiming = E_MI_HDMI_TIMING_1080_30P,
+        .u16Width = 1920,
+        .u16Height = 1080
+    },
+    {
+        .desc = "1080p50",
+        .eOutputTiming = E_MI_DISP_OUTPUT_1080P50,
+        .eHdmiTiming = E_MI_HDMI_TIMING_1080_50P,
+        .u16Width = 1920,
+        .u16Height = 1080
+    },
+    {
+        .desc = "1080p60",
+        .eOutputTiming = E_MI_DISP_OUTPUT_1080P60,
+        .eHdmiTiming = E_MI_HDMI_TIMING_1080_60P,
+        .u16Width = 1920,
+        .u16Height = 1080
+    },
+    {
+        .desc = "1280x800_60",
+        .eOutputTiming = E_MI_DISP_OUTPUT_1280x800_60,
+        .eHdmiTiming = E_MI_HDMI_TIMING_1280x800_60P,
+        .u16Width = 1280,
+        .u16Height = 800
+    },
+    {
+        .desc = "1280x1024_60",
+        .eOutputTiming = E_MI_DISP_OUTPUT_1280x1024_60,
+        .eHdmiTiming = E_MI_HDMI_TIMING_1280x1024_60P,
+        .u16Width = 1280,
+        .u16Height = 1024
+    },
+    {
+        .desc = "1366x768_60",
+        .eOutputTiming = E_MI_DISP_OUTPUT_1366x768_60,
+        .eHdmiTiming = E_MI_HDMI_TIMING_1366x768_60P, //HDMI don't support this timing
+        .u16Width = 1366,
+        .u16Height = 768
+    },
+    {
+        .desc = "1440x900_60",
+        .eOutputTiming = E_MI_DISP_OUTPUT_1440x900_60,
+        .eHdmiTiming = E_MI_HDMI_TIMING_1440x900_60P,
+        .u16Width = 1440,
+        .u16Height = 900
+    },
+    {
+        .desc = "1680x1050_60",
+        .eOutputTiming = E_MI_DISP_OUTPUT_1680x1050_60,
+        .eHdmiTiming = E_MI_HDMI_TIMING_1680x1050_60P, //HDMI don't support this timing
+        .u16Width = 1680,
+        .u16Height = 1050
+    },
+    {
+        .desc = "1600x1200_60",
+        .eOutputTiming = E_MI_DISP_OUTPUT_1600x1200_60,
+        .eHdmiTiming = E_MI_HDMI_TIMING_1600x1200_60P,
+        .u16Width = 1600,
+        .u16Height = 1200
+    },
+    {
+        .desc = "2560x1440_30",
+        .eOutputTiming = E_MI_DISP_OUTPUT_2560x1440_30,
+        .eHdmiTiming = E_MI_HDMI_TIMING_MAX, //HDMI don't support this timing
+        .u16Width = 2560,
+        .u16Height = 1440
+    },
+    {
+        .desc = "2560x1440_60",
+        .eOutputTiming = E_MI_DISP_OUTPUT_MAX, //not defined
+        .eHdmiTiming = E_MI_HDMI_TIMING_MAX,   //HDMI don't support this timing
+        .u16Width = 2560,
+        .u16Height = 1440
+    },
+    {
+        .desc = "2560x1600_60",
+        .eOutputTiming = E_MI_DISP_OUTPUT_2560x1600_60,
+        .eHdmiTiming = E_MI_HDMI_TIMING_MAX, //HDMI don't support this timing
+        .u16Width = 2560,
+        .u16Height = 1600
+    },
+    {
+        .desc = "3840x2160_30",
+        .eOutputTiming = E_MI_DISP_OUTPUT_3840x2160_30,
+        .eHdmiTiming = E_MI_HDMI_TIMING_4K2K_30P,
+        .u16Width = 3840,
+        .u16Height = 2160
+    },
+    {
+        .desc = "3840x2160_60",
+        .eOutputTiming = E_MI_DISP_OUTPUT_3840x2160_60,
+        .eHdmiTiming = E_MI_HDMI_TIMING_4K2K_60P,
+        .u16Width = 3840,
+        .u16Height = 2160
+    },
 };
 
 static MI_S32 Hdmi_Start(MI_HDMI_DeviceId_e eHdmi, MI_HDMI_TimingType_e eTimingType)
 {
     MI_HDMI_Attr_t stAttr;
     memset(&stAttr, 0, sizeof(MI_HDMI_Attr_t));
-    if (eTimingType == E_MI_HDMI_TIMING_MAX)
-    {
+    if(eTimingType == E_MI_HDMI_TIMING_MAX) {
         printf("[%s][%d]unsupported hdmi timing %d,reset to 1080p60\n", __FUNCTION__, __LINE__, eTimingType);
         eTimingType = E_MI_HDMI_TIMING_1080_60P;
     }
@@ -163,10 +204,8 @@ static stTimingArray_t *gettiming(MI_DISP_OutputTiming_e eOutputTiming)
 {
     int index = 0;
 
-    for (index = 0; index < sizeof(astTimingArray); index++)
-    {
-        if (eOutputTiming == astTimingArray[index].eOutputTiming)
-        {
+    for(index = 0; index < sizeof(astTimingArray); index++) {
+        if(eOutputTiming == astTimingArray[index].eOutputTiming) {
             return astTimingArray + index;
         }
     }
