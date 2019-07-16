@@ -145,6 +145,14 @@ int MiniGUIMain(int args, const char* arg[])
     NoteBook(NULL);
     return 0;
 }
+#ifdef _USE_MINIGUIENTRY
+int main(int argc, const char *argv[])
+{
+    main_entry(argc, argv);
+    return 0;
+
+}
+#endif
 
 #ifndef _LITE_VERSION 
 #include <minigui/dti.c>

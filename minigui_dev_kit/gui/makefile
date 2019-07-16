@@ -2,7 +2,7 @@
 MODULES:= freetype tslib zlib jpeg libpng Chipmunk2D minigui libmgplus libmgutils libmgeff libmgncs
 MODULES+= minigui-res
 
-APP_MODULES+= libmgncs4touch  helloworld
+APP_MODULES+= libmgi libmgncs4touch  helloworld
 
 
 MODULES_CONFIG:=$(patsubst %,%_config,$(MODULES))
