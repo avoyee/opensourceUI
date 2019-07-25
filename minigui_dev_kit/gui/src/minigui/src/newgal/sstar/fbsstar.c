@@ -193,6 +193,23 @@ static void FB_DeleteDevice(GAL_VideoDevice *device)
     free(device);
 }
 
+static void FB_UpdateFbOffsety(_THIS,int offset) {
+
+    struct fb_var_screeninfo vinfo;
+    memset(&vinfo, 0, sizeof(struct fb_var_screeninfo));
+    /* Set the video mode and get the final screen format */
+    if (ioctl(console_fd, FBIOGET_VSCREENINFO, &vinfo) < 0)
+    {
+        fprintf(stderr, "Couldn't get console screen info");
+        return ;
+    }
+    vinfo.yoffset = offset;
+    if (ioctl(console_fd, FBIOPAN_DISPLAY, &vinfo) < 0)
+    {
+        fprintf(stderr, "Serious error, offset framebuffer failed.\n");
+        return ;
+    }
+}
 static GAL_VideoDevice *FB_CreateDevice(int devindex)
 {
     GAL_VideoDevice *this;
@@ -247,6 +264,7 @@ static GAL_VideoDevice *FB_CreateDevice(int devindex)
     this->FreeHWSurface = FB_FreeHWSurface;
     this->GetFBInfo = FB_GetFBInfo;
     this->free = FB_DeleteDevice;
+    this->UpdateFbOffsety = FB_UpdateFbOffsety;
 
     return this;
 }

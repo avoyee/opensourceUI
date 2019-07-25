@@ -200,6 +200,7 @@ struct GAL_VideoDevice {
     
     /* Set surface UpdateRects*/                
     void (*UpdateSurfaceRects) (_THIS, GAL_Surface* surface, int numrects, GAL_Rect *rects);
+    void (*UpdateFbOffsety) (_THIS,int offset);
 
 };
 #undef _THIS
