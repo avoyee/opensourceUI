@@ -513,6 +513,8 @@ static inline void _dc_step_y (PDC pdc, int step)
 
 #endif 
 
+int __mg_enter_painting(PDC pdc);
+void __mg_leave_painting(PDC pdc);
 int __mg_enter_drawing (PDC pdc);
 void __mg_enter_drawing_nocheck (PDC pdc);
 void __mg_leave_drawing (PDC pdc);

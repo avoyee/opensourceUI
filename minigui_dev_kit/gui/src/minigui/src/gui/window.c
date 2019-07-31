@@ -5002,7 +5002,9 @@ HDC GUIAPI BeginPaint (HWND hWnd)
     }
 
     hdc = get_valid_dc (pWin, TRUE);
-
+#ifdef _MGRM_THREADS
+    __mg_enter_painting(hdc);
+#endif
 #if 0
     /* FIXME: why do this? */
     if (((PMAINWIN)hWnd)->dwExStyle & WS_EX_TRANSPARENT)
@@ -5100,7 +5102,9 @@ void GUIAPI EndPaint (HWND hWnd, HDC hdc)
             ReleaseDC (real_dc);
         }
     }
-
+#ifdef _MGRM_THREADS
+    __mg_leave_painting(hdc);
+#endif
     release_valid_dc (pWin, hdc);
 
     /* privCDC is not need Release, but need clear lcrgn.*/

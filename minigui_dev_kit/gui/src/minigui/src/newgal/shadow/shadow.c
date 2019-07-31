@@ -65,12 +65,7 @@
 #include <sys/stat.h>
 #include <semaphore.h>
 
-union semun {
-    int val;                    /* value for SETVAL */
-    struct semid_ds *buf;       /* buffer for IPC_STAT, IPC_SET */
-    unsigned short int *array;  /* array for GETALL, SETALL */
-    struct seminfo *__buf;      /* buffer for IPC_INFO */
-};
+
 
 #endif
 
@@ -78,6 +73,12 @@ union semun {
 #include "newgal.h"
 #include "sysvideo.h"
 #include "pixels_c.h"
+#include "gdi.h"
+#include "window.h"
+#include "cliprect.h"
+#include "internals.h"
+#include "ctrlclass.h"
+#include "dc.h"
 
 #define SHADOWVID_DRIVER_NAME "shadow"
 #include "shadow.h"
@@ -417,7 +418,7 @@ static void RealEngine_Sleep(void)
 #ifdef WIN32
     win_sleep(20);
 #else
-    usleep(5*1000);
+    usleep(1000);
 #endif
     return ;
 }
@@ -533,6 +534,7 @@ static void *task_do_update(void *data)
 #ifdef _MGRM_PROCESSES
             _sysvipc_sem_op(this->hidden->semid, 0, -1);
 #else
+            __mg_enter_painting(HDC_SCREEN);
             pthread_mutex_lock(&this->hidden->update_lock);
 #endif
 
@@ -610,6 +612,7 @@ static void *task_do_update(void *data)
             _sysvipc_sem_op(this->hidden->semid, 0, 1);
 #else
             pthread_mutex_unlock(&this->hidden->update_lock);
+            __mg_leave_painting(HDC_SCREEN);
 #endif
 
         }

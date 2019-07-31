@@ -89,6 +89,7 @@ const RGB SysPixelColor [] = {
 #ifdef _MGRM_THREADS
 /* mutex ensuring exclusive access to gdi.  */
 pthread_mutex_t __mg_gdilock;
+pthread_mutex_t __mg_screenlock;
 #endif
 
 /************************* global functions declaration **********************/
@@ -188,6 +189,7 @@ BOOL mg_InitScreenDC(void *surface)
     InitFreeClipRectList(&__mg_FreeClipRectList, SIZE_CLIPRECTHEAP);
 
     INIT_LOCK(&__mg_gdilock, NULL);
+    INIT_LOCK(&__mg_screenlock, NULL);
     INIT_LOCK(&dcslot, NULL);
 
     dc_InitClipRgnInfo();
@@ -218,6 +220,7 @@ void mg_TerminateScreenDC(void)
     dc_DeinitClipRgnInfo();
 
     DESTROY_LOCK(&__mg_gdilock);
+    DESTROY_LOCK(&__mg_screenlock);
     DESTROY_LOCK(&dcslot);
     /* [2010/06/02] DongJunJie : fix a dead-lock bug of mgncs. */
     DestroyFreeClipRectList(&__mg_FreeClipRectList);
@@ -558,6 +561,15 @@ PDC __mg_check_ecrgn(HDC hdc)
     }
 
     return pdc;
+}
+int __mg_enter_painting(PDC pdc)
+{
+    LOCK(&__mg_screenlock);
+    return 0;
+}
+void __mg_leave_painting(PDC pdc)
+{
+    UNLOCK(&__mg_screenlock);
 }
 
 int __mg_enter_drawing(PDC pdc)
