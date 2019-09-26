@@ -101,8 +101,17 @@ int Sstar_GFX_HWAccelBlit(GAL_Surface *src, GAL_Rect *srcrect, GAL_Surface *dst,
 
     memset(&stOpt, 0, sizeof(stOpt));
 
-    stOpt.eSrcDfbBldOp = E_MI_GFX_DFB_BLD_ONE;
-    stOpt.eDstDfbBldOp = E_MI_GFX_DFB_BLD_ZERO;
+    if (((src->flags & GAL_SRCALPHA) && src->format->alpha != GAL_ALPHA_OPAQUE) 
+        || ((src->flags & GAL_SRCPIXELALPHA) && src->format->Amask))
+    {    
+        stOpt.eSrcDfbBldOp = E_MI_GFX_DFB_BLD_SRCALPHA;
+        stOpt.eDstDfbBldOp = E_MI_GFX_DFB_BLD_INVSRCALPHA;
+    }
+    else
+    {
+        stOpt.eSrcDfbBldOp = E_MI_GFX_DFB_BLD_ONE;
+        stOpt.eDstDfbBldOp = E_MI_GFX_DFB_BLD_ZERO;
+    }
     stOpt.eMirror = E_MI_GFX_MIRROR_NONE;
     stOpt.eRotate = E_MI_GFX_ROTATE_0;
     

@@ -58,11 +58,11 @@ int cli_conn (const char *name, char project)
 {
     int                fd, len;
     struct sockaddr_un unix_addr;
-    int line = __LINE__;
+
     /* create a Unix domain stream socket */
     if ( (fd = socket(AF_UNIX, SOCK_STREAM, 0)) < 0)
         return(-1);
-    line = __LINE__;
+
     /* fill socket address structure w/our address */
     memset(&unix_addr, 0, sizeof(unix_addr));
     unix_addr.sun_family = AF_UNIX;
@@ -74,10 +74,9 @@ int cli_conn (const char *name, char project)
     unlink (unix_addr.sun_path);        /* in case it already exists */
     if (bind(fd, (struct sockaddr *) &unix_addr, len) < 0)
         goto error;
-    line = __LINE__;
     if (chmod(unix_addr.sun_path, CLI_PERM) < 0)
         goto error;
-    line = __LINE__;
+
     /* fill socket address structure w/server's addr */
     memset(&unix_addr, 0, sizeof(unix_addr));
     unix_addr.sun_family = AF_UNIX;
@@ -87,14 +86,11 @@ int cli_conn (const char *name, char project)
     /* th unix_addr.sun_len = len; */
 
     if (connect (fd, (struct sockaddr *) &unix_addr, len) < 0)
-    {
-        perror("connect");
         goto error;
-    }
-    line = __LINE__;
+
     return (fd);
+
 error:
     close (fd);
-    printf("%s fail %d\n",__FUNCTION__,line);
     return(-1);
 }

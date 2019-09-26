@@ -2,6 +2,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdio.h>
 //3 //kernel
 #include <sys/ipc.h>
 #include <sys/shm.h>

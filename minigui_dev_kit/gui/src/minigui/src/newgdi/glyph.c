@@ -350,6 +350,7 @@ BOOL InitTextBitmapBuffer (void)
 {
     char_bits = NULL;
     char_bmp.bmBits = NULL;
+    char_bmp.bmPhyAddr = 0;
     return TRUE;
 }
 

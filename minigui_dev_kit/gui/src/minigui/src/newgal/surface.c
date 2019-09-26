@@ -229,19 +229,21 @@ int GAL_SetColorKey(GAL_Surface *surface, Uint32 flag, Uint32 key)
 
         surface->flags |= GAL_SRCCOLORKEY;
         surface->format->colorkey = key;
-        if ( (surface->flags & GAL_HWACCEL) == GAL_HWACCEL ) {
-            if ( (video->SetHWColorKey == NULL) ||
-                 (video->SetHWColorKey(this, surface, key) < 0) ) {
+
+        if((surface->flags & GAL_HWACCEL) == GAL_HWACCEL) {
+            if((video->SetHWColorKey == NULL) ||
+               (video->SetHWColorKey(this, surface, key) < 0)) {
                 surface->flags &= ~GAL_HWACCEL;
             }
         }
-        if ( flag & GAL_RLEACCELOK ) {
+
+        if(flag & GAL_RLEACCELOK) {
             surface->flags |= GAL_RLEACCELOK;
         } else {
             surface->flags &= ~GAL_RLEACCELOK;
         }
     } else {
-        surface->flags &= ~(GAL_SRCCOLORKEY|GAL_RLEACCELOK);
+        surface->flags &= ~(GAL_SRCCOLORKEY | GAL_RLEACCELOK);
         surface->format->colorkey = 0;
     }
 
@@ -1088,7 +1090,7 @@ static int _PutBoxAlphaChannelEx(GAL_Surface *dst, BYTE *dstrow, BYTE *srcrow, U
         while(h--) {
             dstpixels = dstrow;
             srcpixels = srcrow;
-            DUFFS_LOOP( {
+            DUFFS_LOOP({
                 Uint32 pixel;
                 unsigned sR;
                 unsigned sG;
@@ -1119,7 +1121,7 @@ static int _PutBoxAlphaChannelEx(GAL_Surface *dst, BYTE *dstrow, BYTE *srcrow, U
             dstpixels = dstrow;
             srcpixels = srcrow;
             alpha_mask_index = alpha_mask_row;
-            DUFFS_LOOP( {
+            DUFFS_LOOP({
                 Uint32 pixel;
                 unsigned sR;
                 unsigned sG;
@@ -1165,7 +1167,7 @@ static int _PutBoxAlpha(GAL_Surface *dst, BYTE *dstrow, BYTE *srcrow, Uint32 w, 
                 Uint32 *srcp = (Uint32 *)srcrow;
                 Uint32 *dstp = (Uint32 *)dstrow;
                 unsigned char alpha;
-                DUFFS_LOOP4( {
+                DUFFS_LOOP4({
                     Uint32 s;
                     Uint32 d;
                     Uint32 s1;
@@ -1198,7 +1200,7 @@ static int _PutBoxAlpha(GAL_Surface *dst, BYTE *dstrow, BYTE *srcrow, Uint32 w, 
             while(h--) {
                 dstpixels = dstrow;
                 srcpixels = srcrow;
-                DUFFS_LOOP( {
+                DUFFS_LOOP({
                     Uint32 pixel;
                     unsigned sR = 0;
                     unsigned sG = 0;
@@ -1234,7 +1236,7 @@ static int _PutBoxAlpha(GAL_Surface *dst, BYTE *dstrow, BYTE *srcrow, Uint32 w, 
             dstpixels = dstrow;
             srcpixels = srcrow;
             alpha_mask_index = alpha_mask_row;
-            DUFFS_LOOP( {
+            DUFFS_LOOP({
                 Uint32 pixel;
                 unsigned sR;
                 unsigned sG;
@@ -1276,7 +1278,7 @@ static int _PutBoxAlphaChannel(GAL_Surface *dst, BYTE *dstrow, BYTE *srcrow, Uin
     while(h--) {
         dstpixels = dstrow;
         srcpixels = srcrow;
-        DUFFS_LOOP( {
+        DUFFS_LOOP({
             Uint32 pixel;
             unsigned sR;
             unsigned sG;
@@ -1317,7 +1319,7 @@ static int _PutBoxKeyAlphaChannelEx(GAL_Surface *dst, BYTE *dstrow, BYTE *srcrow
         while(h--) {
             dstpixels = dstrow;
             srcpixels = srcrow;
-            DUFFS_LOOP( {
+            DUFFS_LOOP({
                 Uint32 pixel;
                 unsigned sR;
                 unsigned sG;
@@ -1353,7 +1355,7 @@ static int _PutBoxKeyAlphaChannelEx(GAL_Surface *dst, BYTE *dstrow, BYTE *srcrow
             dstpixels = dstrow;
             srcpixels = srcrow;
             alpha_mask_index = alpha_mask_row;
-            DUFFS_LOOP( {
+            DUFFS_LOOP({
                 Uint32 pixel;
                 unsigned sR;
                 unsigned sG;
@@ -1404,7 +1406,7 @@ static int _PutBoxKeyAlpha(GAL_Surface *dst, BYTE *dstrow, BYTE *srcrow, Uint32 
         while(h--) {
             dstpixels = dstrow;
             srcpixels = srcrow;
-            DUFFS_LOOP( {
+            DUFFS_LOOP({
                 Uint32 pixel;
                 unsigned sR;
                 unsigned sG;
@@ -1440,7 +1442,7 @@ static int _PutBoxKeyAlpha(GAL_Surface *dst, BYTE *dstrow, BYTE *srcrow, Uint32 
             dstpixels = dstrow;
             srcpixels = srcrow;
             alpha_mask_index = alpha_mask_row;
-            DUFFS_LOOP( {
+            DUFFS_LOOP({
                 Uint32 pixel;
                 unsigned sR;
                 unsigned sG;
@@ -1505,7 +1507,7 @@ static int _PutBoxKey(GAL_Surface *dst, BYTE *dstrow, BYTE *srcrow, Uint32 w, Ui
     else while(h--) {
             dstpixels = dstrow;
             srcpixels = srcrow;
-            DUFFS_LOOP( {
+            DUFFS_LOOP({
                 Uint32 pixel;
                 unsigned sR;
                 unsigned sG;
@@ -1529,7 +1531,7 @@ static int _PutBoxKey(GAL_Surface *dst, BYTE *dstrow, BYTE *srcrow, Uint32 w, Ui
     else while(h--) {
             dstpixels = dstrow;
             srcpixels = srcrow;
-            DUFFS_LOOP( {
+            DUFFS_LOOP({
                 Uint32 pixel;
                 unsigned sR;
                 unsigned sG;
@@ -1572,7 +1574,7 @@ static int _PutBoxKeyAlphaChannel(GAL_Surface *dst, BYTE *dstrow, BYTE *srcrow, 
     while(h--) {
         dstpixels = dstrow;
         srcpixels = srcrow;
-        DUFFS_LOOP( {
+        DUFFS_LOOP({
             Uint32 pixel;
             unsigned sR;
             unsigned sG;
@@ -1607,18 +1609,19 @@ static int _PutBoxKeyAlphaChannel(GAL_Surface *dst, BYTE *dstrow, BYTE *srcrow, 
 #include "mi_sys.h"
 #include "time.h"
 extern unsigned int GALFmtToMStarFmt(GAL_Surface *pSurface);
-
-int GAL_PutBox(GAL_Surface *dst, const GAL_Rect *dstrect, BITMAP *box)
+int GAL_PutBoxSlow(GAL_Surface *dst, const GAL_Rect *dstrect, BITMAP *box)
 {
     Uint32 box_x, box_y, off_x, off_y;
-    int  w, h;
+    int y, w, h;
     Uint8 *srcrow, *dstrow;
+    Uint32 linelen;
     GAL_Rect my_dstrect;
-    //static BOOL once=TRUE;;
+
     /* If 'dstrect' == NULL, then put to (0, 0) */
     if(dstrect) {
         box_x = dstrect->x;
         box_y = dstrect->y;
+
         /* Perform clipping */
         if(!GAL_IntersectRect(dstrect, &dst->clip_rect, &my_dstrect)) {
             return 0;
@@ -1626,6 +1629,7 @@ int GAL_PutBox(GAL_Surface *dst, const GAL_Rect *dstrect, BITMAP *box)
     } else {
         box_x = 0;
         box_y = 0;
+
         my_dstrect = dst->clip_rect;
     }
 
@@ -1641,100 +1645,10 @@ int GAL_PutBox(GAL_Surface *dst, const GAL_Rect *dstrect, BITMAP *box)
              my_dstrect.x * dst->format->BytesPerPixel;
     srcrow = (Uint8 *)box->bmBits + off_y * box->bmPitch +
              off_x * box->bmBytesPerPixel;
-    
     w = MIN(my_dstrect.w, box->bmWidth);
     h = MIN(my_dstrect.h, box->bmHeight);
-    /*
-    if(once)
-    {
-        printf("%s %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",__FUNCTION__,__LINE__,\
-            my_dstrect.x,my_dstrect.y,my_dstrect.w,my_dstrect.h,\
-            dstrect->x,dstrect->y,dstrect->w,dstrect->h,\
-            box->bmWidth,box->bmHeight,off_x,off_y,box->bmPitch,dst->pitch);
-       // once=FALSE;
-    }
-    */
-    {
+    linelen = w * box->bmBytesPerPixel;
 
-        MI_GFX_Surface_t stSrc;
-        MI_GFX_Rect_t stSrcRect;
-        MI_GFX_Surface_t stDst;
-        MI_GFX_Rect_t stDstRect;
-        MI_GFX_Opt_t stOpt;
-        MI_U16 u16Fence;
-        MI_GFX_ColorKeyInfo_t stColorKey;
-        //clock_t start,end;
-
-
-        stDst.phyAddr = ABS(dst->phy_addr);
-        stDst.eColorFmt =GALFmtToMStarFmt(dst);
-        stDst.u32Width = dst->w ;
-        stDst.u32Height = dst->h ;
-        stDst.u32Stride = dst->pitch ;
-
-        stDstRect.s32Xpos = my_dstrect.x;
-        stDstRect.s32Ypos = my_dstrect.y;
-        stDstRect.u32Width =w;
-        stDstRect.u32Height = h;
-
-        stSrc.phyAddr = box->bmPhyAddr;
-        stSrc.eColorFmt = stDst.eColorFmt;
-
-        stSrc.u32Width = box->bmWidth ;
-        stSrc.u32Height = box->bmHeight ;
-        stSrc.u32Stride = box->bmPitch ;
-
-        stSrcRect.s32Xpos = off_x;
-        stSrcRect.s32Ypos = off_y;
-        stSrcRect.u32Width =  w;
-        stSrcRect.u32Height =  h;
-
-        memset(&stOpt, 0, sizeof(stOpt));
-        memset(&stColorKey, 0, sizeof(stColorKey));
-
-        if(box->bmType & BMP_TYPE_ALPHACHANNEL) {
-            stOpt.u32GlobalSrcConstColor = (0xFF & box->bmAlpha) << 24;
-            stOpt.u32GlobalDstConstColor = 0xFF000000;
-            stOpt.eDFBBlendFlag = E_MI_GFX_DFB_BLEND_ALPHACHANNEL | E_MI_GFX_DFB_BLEND_COLORALPHA;
-        } else {
-            stOpt.u32GlobalSrcConstColor = 0xFF000000;
-            stOpt.u32GlobalDstConstColor = 0xFF000000;
-            //stOpt.eDFBBlendFlag = E_MI_GFX_DFB_BLEND_ALPHACHANNEL|E_MI_GFX_DFB_BLEND_COLORALPHA;
-        }
-
-        if(box->bmType & BMP_TYPE_COLORKEY) {
-            stColorKey.bEnColorKey = TRUE;
-            stColorKey.eCKeyFmt = stSrc.eColorFmt;
-            stColorKey.eCKeyOp = E_MI_GFX_RGB_OP_EQUAL;
-            stColorKey.stCKeyVal.u32ColorStart = box->bmColorKey;
-            stColorKey.stCKeyVal.u32ColorEnd = box->bmColorKey;
-        }
-
-        stOpt.eSrcDfbBldOp = E_MI_GFX_DFB_BLD_SRCALPHA;
-        stOpt.eDstDfbBldOp = E_MI_GFX_DFB_BLD_INVSRCALPHA;
-        stOpt.eMirror = E_MI_GFX_MIRROR_NONE;
-        stOpt.eRotate = E_MI_GFX_ROTATE_0;
-        stOpt.stClipRect.s32Xpos =  stDstRect.s32Xpos;
-        stOpt.stClipRect.s32Ypos = stDstRect.s32Ypos;
-        stOpt.stClipRect.u32Width  =  stDstRect.u32Width;
-        stOpt.stClipRect.u32Height =  stDstRect.u32Height;
-        stOpt.stSrcColorKeyInfo = stColorKey;
-        //start = clock();
-        /*
-            if(box->bmPhyAddr)
-                MI_SYS_FlushInvCache(box->bmBits, box->bmHeight * box->bmPitch);
-
-            if(pdc->surface->phy_addr < 0) {
-                MI_SYS_FlushInvCache(pdc->surface->pixels, pdc->surface->h * pdc->surface->pitch);
-            }
-        */
-        MI_GFX_BitBlit(&stSrc, &stSrcRect, &stDst, &stDstRect, &stOpt, &u16Fence);
-        //MI_GFX_WaitAllDone(FALSE, u16Fence);
-        //end = clock();
-        //printf("%s %d %f %d %d\n", __FUNCTION__, __LINE__, (float)(end - start) / CLOCKS_PER_SEC, stDstRect.u32Width, stDstRect.u32Height);
-        return 0 ;
-
-    }
     /* TODO: Check for hardware acceleration here */
     if(box->bmType & BMP_TYPE_ALPHA) {
         if((box->bmType & BMP_TYPE_ALPHACHANNEL) && (box->bmType & BMP_TYPE_COLORKEY)) {
@@ -1756,7 +1670,217 @@ int GAL_PutBox(GAL_Surface *dst, const GAL_Rect *dstrect, BITMAP *box)
         return _PutBoxAlphaChannel(dst, dstrow, srcrow, w, h, box);
     }
 
+
+    switch(dst->format->BytesPerPixel) {
+        case 1:
+            if(((DWORD)srcrow & 3) || ((DWORD)dstrow & 3)
+               || (linelen & 3) || (box->bmPitch & 3) || (dst->pitch & 3))
+                goto slow_copy;
+            else {
+                int n = linelen >> 2;
+
+                for(y = h; y; --y) {
+                    GAL_memcpy4(dstrow, srcrow, n);
+                    srcrow += box->bmPitch;
+                    dstrow += dst->pitch;
+                }
+            }
+
+            break;
+
+        case 2:
+            if((((DWORD)dstrow & 3) != ((DWORD)srcrow & 3))
+               || (box->bmPitch & 3) || (dst->pitch & 3))
+                goto slow_copy;
+
+            for(y = h; y; --y) {
+                Uint16 *dstpixels = (Uint16 *)dstrow;
+                Uint16 *srcpixels = (Uint16 *)srcrow;
+                int n = w;
+
+                if((DWORD)dstpixels & 3) {
+                    *dstpixels = *srcpixels;
+                    dstpixels++;
+                    srcpixels++;
+                    n--;
+                }
+
+                if(n >> 1)
+                    GAL_memcpy4(dstpixels, srcpixels, n >> 1);
+
+                if(n & 1)
+                    dstpixels [n - 1] = srcpixels [n - 1];
+
+                srcrow += box->bmPitch;
+                dstrow += dst->pitch;
+            }
+
+            break;
+
+        case 3:
+            goto slow_copy;
+
+        case 4:
+            for(y = h; y; --y) {
+                GAL_memcpy4(dstrow, srcrow, w);
+                srcrow += box->bmPitch;
+                dstrow += dst->pitch;
+            }
+
+            break;
+    }
+
     return 0;
+
+slow_copy:
+
+    for(y = h; y; --y) {
+        GAL_memcpy(dstrow, srcrow, linelen);
+        srcrow += box->bmPitch;
+        dstrow += dst->pitch;
+    }
+
+    return 0;
+}
+
+int GAL_PutBox(GAL_Surface *dst, const GAL_Rect *dstrect, BITMAP *box)
+{
+    Uint32 box_x, box_y, off_x, off_y;
+    int  w, h;
+    //Uint8 *srcrow, *dstrow;
+    GAL_Rect my_dstrect;
+    //static BOOL once = FALSE;;
+
+    /* If 'dstrect' == NULL, then put to (0, 0) */
+
+    if(box->bmPhyAddr == 0) {
+        return GAL_PutBoxSlow(dst, dstrect, box);
+    }
+
+    if(dstrect) {
+        box_x = dstrect->x;
+        box_y = dstrect->y;
+
+        /* Perform clipping */
+        if(!GAL_IntersectRect(dstrect, &dst->clip_rect, &my_dstrect)) {
+            return 0;
+        }
+    } else {
+        box_x = 0;
+        box_y = 0;
+        my_dstrect = dst->clip_rect;
+    }
+
+    off_x = my_dstrect.x - box_x;
+    off_y = my_dstrect.y - box_y;
+
+    if(off_x >= box->bmWidth || off_y >= box->bmHeight ||
+       box->bmBytesPerPixel != dst->format->BytesPerPixel) {
+        return 0;
+    }
+
+
+
+    w = MIN(my_dstrect.w, box->bmWidth);
+    h = MIN(my_dstrect.h, box->bmHeight);
+    /*
+        if(once) {
+            printf("%s %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n", __FUNCTION__, __LINE__, \
+                   my_dstrect.x, my_dstrect.y, my_dstrect.w, my_dstrect.h, \
+                   dstrect->x, dstrect->y, dstrect->w, dstrect->h, \
+                   box->bmWidth, box->bmHeight, off_x, off_y, box->bmPitch, dst->pitch);
+            // once=FALSE;
+        }
+    */
+
+    MI_GFX_Surface_t stSrc;
+    MI_GFX_Rect_t stSrcRect;
+    MI_GFX_Surface_t stDst;
+    MI_GFX_Rect_t stDstRect;
+    MI_GFX_Opt_t stOpt;
+    MI_U16 u16Fence;
+    MI_GFX_ColorKeyInfo_t stColorKey;
+    //clock_t start,end;
+
+
+    stDst.phyAddr = ABS(dst->phy_addr);
+    stDst.eColorFmt = GALFmtToMStarFmt(dst);
+    stDst.u32Width = dst->w ;
+    stDst.u32Height = dst->h ;
+    stDst.u32Stride = dst->pitch ;
+
+    stDstRect.s32Xpos = my_dstrect.x;
+    stDstRect.s32Ypos = my_dstrect.y;
+    stDstRect.u32Width = w;
+    stDstRect.u32Height = h;
+
+    stSrc.phyAddr = box->bmPhyAddr;
+    stSrc.eColorFmt = stDst.eColorFmt;
+
+    stSrc.u32Width = box->bmWidth ;
+    stSrc.u32Height = box->bmHeight;
+    stSrc.u32Stride = box->bmPitch ;
+
+    stSrcRect.s32Xpos = off_x;
+    stSrcRect.s32Ypos = off_y;
+    stSrcRect.u32Width =  w;
+    stSrcRect.u32Height =  h;
+
+    memset(&stOpt, 0, sizeof(stOpt));
+    memset(&stColorKey, 0, sizeof(stColorKey));
+
+    if(box->bmType & BMP_TYPE_ALPHACHANNEL) {
+        stOpt.u32GlobalSrcConstColor = (0xFF & box->bmAlpha) << 24;
+        stOpt.u32GlobalDstConstColor = 0xFF000000;
+        stOpt.eDFBBlendFlag |= E_MI_GFX_DFB_BLEND_ALPHACHANNEL;
+    } else {
+        stOpt.u32GlobalSrcConstColor = 0xFF000000;
+        stOpt.u32GlobalDstConstColor = 0xFF000000;
+        //stOpt.eDFBBlendFlag = E_MI_GFX_DFB_BLEND_ALPHACHANNEL|E_MI_GFX_DFB_BLEND_COLORALPHA;
+    }
+
+    if(box->bmType & BMP_TYPE_COLORKEY) {
+        stColorKey.bEnColorKey = TRUE;
+        stColorKey.eCKeyFmt = stSrc.eColorFmt;
+        stColorKey.eCKeyOp = E_MI_GFX_RGB_OP_EQUAL;
+        stColorKey.stCKeyVal.u32ColorStart = box->bmColorKey;
+        stColorKey.stCKeyVal.u32ColorEnd = box->bmColorKey;
+    }
+
+    if(box->bmType & BMP_TYPE_ALPHA) {
+        if(!(box->bmType & BMP_TYPE_ALPHA_MASK)) {
+
+        } else {
+            stOpt.eDFBBlendFlag |= E_MI_GFX_DFB_BLEND_COLORALPHA;
+        }
+
+    }
+
+    stOpt.eSrcDfbBldOp = E_MI_GFX_DFB_BLD_SRCALPHA;
+    stOpt.eDstDfbBldOp = E_MI_GFX_DFB_BLD_INVSRCALPHA;
+    stOpt.eMirror = E_MI_GFX_MIRROR_NONE;
+    stOpt.eRotate = E_MI_GFX_ROTATE_0;
+    stOpt.stClipRect.s32Xpos =  stDstRect.s32Xpos;
+    stOpt.stClipRect.s32Ypos = stDstRect.s32Ypos;
+    stOpt.stClipRect.u32Width  =  stDstRect.u32Width;
+    stOpt.stClipRect.u32Height =  stDstRect.u32Height;
+    stOpt.stSrcColorKeyInfo = stColorKey;
+    //start = clock();
+    /*
+        if(box->bmPhyAddr)
+            MI_SYS_FlushInvCache(box->bmBits, box->bmHeight * box->bmPitch);
+
+        if(pdc->surface->phy_addr < 0) {
+            MI_SYS_FlushInvCache(pdc->surface->pixels, pdc->surface->h * pdc->surface->pitch);
+        }
+    */
+    MI_GFX_BitBlit(&stSrc, &stSrcRect, &stDst, &stDstRect, &stOpt, &u16Fence);
+    MI_GFX_WaitAllDone(FALSE, u16Fence);
+    //end = clock();
+    //printf("%s %d %f %d %d\n", __FUNCTION__, __LINE__, (float)(end - start) / CLOCKS_PER_SEC, stDstRect.u32Width, stDstRect.u32Height);
+    return 0 ;
+
+
 }
 
 
@@ -2018,23 +2142,30 @@ void GAL_FreeSurface(GAL_Surface *surface)
     }
 
     if((surface->flags & GAL_RLEACCEL) == GAL_RLEACCEL) {
+
         GAL_UnRLESurface(surface, 0);
     }
 
     if(surface->format) {
+
         GAL_FreeFormat(surface->format);
+
         surface->format = NULL;
     }
 
     if(surface->map != NULL) {
+
         GAL_FreeBlitMap(surface->map);
+
         surface->map = NULL;
     }
 
     if((surface->flags & GAL_HWSURFACE) == GAL_HWSURFACE) {
         GAL_VideoDevice *video = current_video;
         GAL_VideoDevice *this  = current_video;
+
         video->FreeHWSurface(this, surface);
+
     }
 
     if(surface->pixels &&

@@ -961,7 +961,6 @@ static GAL_Surface *FB_SetVideoMode(_THIS, GAL_Surface *current,
         }
     }
 
-    fprintf(stderr, "%s %d %llx\n",__FUNCTION__,__LINE__,current->phy_addr);
     /* We're done */
     return (current);
 }

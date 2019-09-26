@@ -80,6 +80,10 @@
 #include "ctrlclass.h"
 #include "dc.h"
 
+
+
+
+
 #define SHADOWVID_DRIVER_NAME "shadow"
 #include "shadow.h"
 
@@ -149,7 +153,11 @@ static int run_flag = 0;
 static int end_flag = 0;
 #ifdef _MGGAL_SSTAR
 GAL_Surface shadow_canvas;
+
 #endif
+
+
+
 #ifdef _MGRM_PROCESSES
 static int shmid;
 /* Down/up a semaphore uninterruptablly. */
@@ -304,6 +312,18 @@ static int RealEngine_GetInfo(RealFBInfo *realfb_info)
     h = atoi(strchr(mode, 'x') + 1);
     depth = atoi(strrchr(mode, '-') + 1);
 
+    if(!strncmp(rotate_screen, "cw", sizeof(rotate_screen)))
+        realfb_info->flags = _ROT_DIR_CW;
+    else if(!strncmp(rotate_screen, "ccw", sizeof(rotate_screen)))
+        realfb_info->flags = _ROT_DIR_CCW;
+    else if(!strncmp(rotate_screen, "hflip", sizeof(rotate_screen)))
+        realfb_info->flags = _ROT_DIR_HFLIP;
+    else if(!strncmp(rotate_screen, "vflip", sizeof(rotate_screen)))
+        realfb_info->flags = _ROT_DIR_VFLIP;
+    else
+        realfb_info->flags = 0;
+
+
     memset(&real_vformat, 0, sizeof(real_vformat));
     real_device = GAL_GetVideo(engine);
 
@@ -320,15 +340,20 @@ static int RealEngine_GetInfo(RealFBInfo *realfb_info)
     if(real_device->screen == NULL)
         fprintf(stderr, "NEWGAL>SHADOW: can't create screen of real engine.\n");
 
-    real_device->SetVideoMode(realfb_info->real_device,
-                              real_device->screen, w, h, depth, GAL_HWPALETTE);
+    if(realfb_info->flags & _ROT_DIR_CW || realfb_info->flags & _ROT_DIR_CCW)
+        real_device->SetVideoMode(realfb_info->real_device,
+                                  real_device->screen, h, w, depth, GAL_HWPALETTE);
+    else
+        real_device->SetVideoMode(realfb_info->real_device,
+                                  real_device->screen, w, h, depth, GAL_HWPALETTE);
 
     realfb_info->height = real_device->screen->h;
     realfb_info->width = real_device->screen->w;
+
     realfb_info->depth = real_device->screen->format->BitsPerPixel;
     realfb_info->fb = real_device->screen->pixels;
     realfb_info->pitch = real_device->screen->pitch;
-    realfb_info->flags = 0;
+    //realfb_info->flags = 0;
     realfb_info->phy_addr = real_device->screen->phy_addr;
 
     if(realfb_info->depth <= 8)
@@ -336,14 +361,7 @@ static int RealEngine_GetInfo(RealFBInfo *realfb_info)
     else
         pitch_size = realfb_info->pitch;
 
-    if(!strncmp(rotate_screen, "cw", sizeof(rotate_screen)))
-        realfb_info->flags = _ROT_DIR_CW;
-    else if(!strncmp(rotate_screen, "ccw", sizeof(rotate_screen)))
-        realfb_info->flags = _ROT_DIR_CCW;
-    else if(!strncmp(rotate_screen, "hflip", sizeof(rotate_screen)))
-        realfb_info->flags = _ROT_DIR_HFLIP;
-    else if(!strncmp(rotate_screen, "vflip", sizeof(rotate_screen)))
-        realfb_info->flags = _ROT_DIR_VFLIP;
+
 
     __mg_shadow_rotate_flags = realfb_info->flags;
 
@@ -484,8 +502,16 @@ static int SHADOW_VideoInit(_THIS, GAL_PixelFormat *vformat)
     return 0;
 }
 
-
 #define USE_SWAP_BUFF 	1
+#include <unistd.h>
+#include <errno.h>
+#include <sys/select.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <time.h>
+
+
 static void *task_do_update(void *data)
 {
     _THIS;
@@ -521,6 +547,10 @@ static void *task_do_update(void *data)
         usleep(1000);
     }
 
+    int cnt = 0;
+    struct timeval tv0;
+    gettimeofday(&tv0, NULL);
+
     for(;;) {
         if(run_flag != 1) {
             break;
@@ -531,6 +561,7 @@ static void *task_do_update(void *data)
         }
 
         if(_shadowfbheader->dirty || _shadowfbheader->palette_changed) {
+
 #ifdef _MGRM_PROCESSES
             _sysvipc_sem_op(this->hidden->semid, 0, -1);
 #else
@@ -607,12 +638,22 @@ static void *task_do_update(void *data)
             }
 
 #endif
+            cnt++;
+
+            if(cnt >= 30) {
+                struct timeval tv1;
+                gettimeofday(&tv1, NULL);
+                printf("%ld ms\n", (tv1.tv_sec - tv0.tv_sec) * 1000 + (tv1.tv_usec - tv0.tv_usec) / 1000);
+                tv0 = tv1;
+                cnt = 0;
+            }
 
 #ifdef _MGRM_PROCESSES
             _sysvipc_sem_op(this->hidden->semid, 0, 1);
 #else
             pthread_mutex_unlock(&this->hidden->update_lock);
             __mg_leave_painting(HDC_SCREEN);
+
 #endif
 
         }
@@ -751,9 +792,9 @@ static GAL_Surface *SHADOW_SetVideoMode(_THIS, GAL_Surface *current,
         _shadowfbheader->fb_offset = _shadowfbheader->palette_offset;
 
 #ifdef _MGGAL_SSTAR
-    shadow_canvas.w = width;
-    shadow_canvas.h = height;
-    shadow_canvas.pitch = real_device->screen->pitch;
+    shadow_canvas.w = shadowfbheader.width;
+    shadow_canvas.h = shadowfbheader.height;
+    shadow_canvas.pitch = shadowfbheader.pitch;
     SHADOW_AllocHWSurface(this, &shadow_canvas);
     _shadowfbheader->pixels =  shadow_canvas.pixels;
     _shadowfbheader->phy_addr =  shadow_canvas.phy_addr;

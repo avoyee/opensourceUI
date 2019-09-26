@@ -1573,7 +1573,7 @@ void GUIAPI StretchBlt(HDC hsdc, int sx, int sy, int sw, int sh,
     bmp.bmBits = (unsigned char *)psdc->surface->pixels
                  + sy * psdc->surface->pitch
                  + sx * GAL_BytesPerPixel(psdc->surface);
-    bmp.bmPhyAddr = psdc->surface->phy_addr+(void*)bmp.bmBits-(void*)psdc->surface->pixels;
+    bmp.bmPhyAddr = psdc->surface->phy_addr + (void *)bmp.bmBits - (void *)psdc->surface->pixels;
 
     if(pddc->surface ==  psdc->surface)
         GetBoundRect(&pddc->rc_output, &srcOutput, &dstOutput);
@@ -1967,6 +1967,7 @@ static inline void get_linear_pt(BYTE *dst, int dst_off, BYTE *src, int sx, int 
 #include "mi_gfx.h"
 #include "mi_sys.h"
 #include "time.h"
+
 extern unsigned int GALFmtToMStarFmt(GAL_Surface *pSurface);
 BOOL BitmapHWACCELScaler(
     void *context,
@@ -1992,72 +1993,77 @@ BOOL BitmapHWACCELScaler(
     //int i = 0;
     int top;
 
+
+    if(src_bmp->bmPhyAddr == 0)
+        return FALSE;
+
     cliprect = pdc->ecrgn.head;
-    
+
     if(pdc->rop == ROP_SET) {
         top = cliprect->rc.top;
+
         while(cliprect && cliprect->rc.top == top) {
-        if(IntersectRect(&eff_rc, &pdc->rc_output, &cliprect->rc)) {
-            memset(&stOpt, 0, sizeof(stOpt));
+            if(IntersectRect(&eff_rc, &pdc->rc_output, &cliprect->rc)) {
+                memset(&stOpt, 0, sizeof(stOpt));
                 memset(&stColorKey, 0, sizeof(stColorKey));
-            
                 stDst.phyAddr = ABS(pdc->surface->phy_addr);
                 stDst.eColorFmt = GALFmtToMStarFmt(pdc->surface);
                 stDst.u32Width = info->pdc->surface->w ;
                 stDst.u32Height = info->pdc->surface->h ;
                 stDst.u32Stride = info->pdc->surface->pitch ;
-            
+
                 stDstRect.s32Xpos = info->dst_rc.left;
                 stDstRect.s32Ypos = info->dst_rc.top;
-                stDstRect.u32Width =  info->dst_rc.right-info->dst_rc.left;
-                stDstRect.u32Height = info->dst_rc.bottom-info->dst_rc.top;
-            
-            
-            
+                stDstRect.u32Width =  info->dst_rc.right - info->dst_rc.left;
+                stDstRect.u32Height = info->dst_rc.bottom - info->dst_rc.top;
+
+
+
                 stSrc.phyAddr = src_bmp->bmPhyAddr;
                 stSrc.eColorFmt = GALFmtToMStarFmt(pdc->surface);
-            
+
                 stSrc.u32Width = src_bmp->bmWidth ;
                 stSrc.u32Height = src_bmp->bmHeight ;
                 stSrc.u32Stride = src_bmp->bmPitch ;
-            
+
                 stSrcRect.s32Xpos = 0;
                 stSrcRect.s32Ypos = 0;
                 stSrcRect.u32Width = src_bmp->bmWidth;
                 stSrcRect.u32Height = src_bmp->bmHeight;
-                
-                if(info->dst_rc.left <0)
-                {
+
+                if(info->dst_rc.left < 0) {
                     stDstRect.s32Xpos = 0;
-                    stSrcRect.s32Xpos = src_bmp->bmWidth - ((((info->dst_rc.right*src_bmp->bmWidth)<<16)/stDstRect.u32Width)>>16);
+                    stSrcRect.s32Xpos = src_bmp->bmWidth - ((((info->dst_rc.right * src_bmp->bmWidth) << 16) / stDstRect.u32Width) >> 16);
                     stDstRect.u32Width = info->dst_rc.right;
                     stSrcRect.u32Width = stSrcRect.u32Width - stSrcRect.s32Xpos;
+                    //printf("%s %d\n",__FUNCTION__,__LINE__);
                 }
-                if(info->dst_rc.top<0)
-                {
+
+                if(info->dst_rc.top < 0) {
                     stDstRect.s32Ypos = 0;
-                    stSrcRect.s32Ypos = src_bmp->bmHeight - ((((info->dst_rc.bottom*src_bmp->bmHeight)<<16)/stDstRect.u32Height)>>16);
+                    stSrcRect.s32Ypos = src_bmp->bmHeight - ((((info->dst_rc.bottom * src_bmp->bmHeight) << 16) / stDstRect.u32Height) >> 16);
                     stDstRect.u32Height = info->dst_rc.bottom;
                     stSrcRect.u32Height = stSrcRect.u32Height - stSrcRect.s32Ypos;
+                    //printf("%s %d\n",__FUNCTION__,__LINE__);
                 }
-            
+
                 stOpt.stClipRect.s32Xpos = eff_rc.left;
                 stOpt.stClipRect.s32Ypos = eff_rc.top;
                 stOpt.stClipRect.u32Width  = eff_rc.right - eff_rc.left;
                 stOpt.stClipRect.u32Height = eff_rc.bottom - eff_rc.top;
                 //printf("%s %d %d %d %d %d\n", __FUNCTION__, __LINE__, eff_rc.left, eff_rc.top, stOpt.stClipRect.u32Width, stOpt.stClipRect.u32Height);
                 //printf("%s %d %d %d %d %d\n", __FUNCTION__, __LINE__, stDstRect.s32Xpos,stDstRect.s32Ypos, stDstRect.u32Width, stDstRect.u32Height);
-            
+
                 if(src_bmp->bmType & BMP_TYPE_ALPHACHANNEL) {
                     stOpt.u32GlobalSrcConstColor = (0xFF & src_bmp->bmAlpha) << 24;
                     stOpt.u32GlobalDstConstColor = 0xFF000000;
-                    stOpt.eDFBBlendFlag = E_MI_GFX_DFB_BLEND_ALPHACHANNEL | E_MI_GFX_DFB_BLEND_COLORALPHA;
+                    stOpt.eDFBBlendFlag |= E_MI_GFX_DFB_BLEND_ALPHACHANNEL;
                 } else {
                     stOpt.u32GlobalSrcConstColor = 0xFF000000;
                     stOpt.u32GlobalDstConstColor = 0xFF000000;
                     //stOpt.eDFBBlendFlag = E_MI_GFX_DFB_BLEND_ALPHACHANNEL|E_MI_GFX_DFB_BLEND_COLORALPHA;
                 }
-            
+                
                 if(src_bmp->bmType & BMP_TYPE_COLORKEY) {
                     stColorKey.bEnColorKey = TRUE;
                     stColorKey.eCKeyFmt = stSrc.eColorFmt;
@@ -2065,35 +2071,45 @@ BOOL BitmapHWACCELScaler(
                     stColorKey.stCKeyVal.u32ColorStart = src_bmp->bmColorKey;
                     stColorKey.stCKeyVal.u32ColorEnd = src_bmp->bmColorKey;
                 }
-            
+                
+                if(src_bmp->bmType & BMP_TYPE_ALPHA) {
+                    if(!(src_bmp->bmType & BMP_TYPE_ALPHA_MASK)) {
+                
+                    } else {
+                        stOpt.eDFBBlendFlag |= E_MI_GFX_DFB_BLEND_COLORALPHA;
+                    }
+                
+                }
+
+
                 stOpt.eSrcDfbBldOp = E_MI_GFX_DFB_BLD_SRCALPHA;
                 stOpt.eDstDfbBldOp = E_MI_GFX_DFB_BLD_INVSRCALPHA;
                 stOpt.eMirror = E_MI_GFX_MIRROR_NONE;
                 stOpt.eRotate = E_MI_GFX_ROTATE_0;
-            
+
                 stOpt.stSrcColorKeyInfo = stColorKey;
-            
+
                 //start = clock();
                 /*
                     if(src_bmp->bmPhyAddr)
                         MI_SYS_FlushInvCache(src_bmp->bmBits, src_bmp->bmHeight * src_bmp->bmPitch);
-            
+
                     if(pdc->surface->phy_addr < 0) {
                         MI_SYS_FlushInvCache(pdc->surface->pixels, pdc->surface->h * pdc->surface->pitch);
                     }
                 */
                 MI_GFX_BitBlit(&stSrc, &stSrcRect, &stDst, &stDstRect, &stOpt, &u16Fence);
-                //MI_GFX_WaitAllDone(FALSE, u16Fence);
+                MI_GFX_WaitAllDone(FALSE, u16Fence);
                 //end = clock();
                 //printf("%s %d %f %d %d\n", __FUNCTION__, __LINE__, (float)(end - start) / CLOCKS_PER_SEC, stDstRect.u32Width, stDstRect.u32Height);
 
-        }
-        
-        cliprect = cliprect->next;
+            }
+
+            cliprect = cliprect->next;
         }
     } else
         return FALSE;
-    
+
     return TRUE ;
 
 }
