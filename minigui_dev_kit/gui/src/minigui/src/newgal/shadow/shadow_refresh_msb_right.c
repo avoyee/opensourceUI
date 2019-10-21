@@ -256,7 +256,7 @@ void extractSquareClip(RECT src, RECT **clipA, int *clipN)
     if(RECTW(src) > RECTH(src))
     {
         int i = 0;
-        clipNum = RECTW(src) / RECTH(src) + 1;
+        clipNum = (RECTW(src)+RECTH(src)-1) / RECTH(src);
         *clipA = calloc(sizeof(RECT), clipNum);
         clip = *clipA;
 
@@ -276,7 +276,7 @@ void extractSquareClip(RECT src, RECT **clipA, int *clipN)
     else if(RECTW(src) < RECTH(src))
     {
         int i = 0;
-        clipNum = RECTH(src) / RECTW(src) + 1;
+        clipNum = (RECTH(src)+RECTW(src)-1) / RECTW(src);
         *clipA = calloc(sizeof(RECT), clipNum);
         clip = *clipA;
 
@@ -406,14 +406,13 @@ void refresh_cw_msb_right(ShadowFBHeader *shadowfb_header, RealFBInfo *realfb_in
     int srcClipN = 0, dstClipN = 0;
     RECT *srcClip = NULL, *dstClip = NULL;
     extractSquareClip(src_update, &srcClip, &srcClipN);
-    extractSquareClip(dst_update, &dstClip, &dstClipN);
-
-    if(srcClipN != dstClipN)
+    //extractSquareClip(dst_update, &dstClip, &dstClipN);
+    dstClip = calloc(sizeof(RECT), srcClipN);
+    for(int i = 0; i < srcClipN; i++)
     {
-        fprintf(stderr, "NEWGAL>SHADOW: extractSquareClip error\n");
-        return;
-    }
+        _get_dst_rect_cw(&dstClip[i], &srcClip[i], realfb_info);
 
+    }
     for(i = 0; i < srcClipN; i++)
     {
 
